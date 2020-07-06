@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 11:44:28 by aroque            #+#    #+#             */
-/*   Updated: 2020/05/12 23:29:48 by aroque           ###   ########.fr       */
+/*   Updated: 2020/05/27 23:02:36 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <errno.h>
 #include "scene.h"
 
+// comment
+//
 int	main(int argc, char *argv[])
 {
 	t_scene	*scene;

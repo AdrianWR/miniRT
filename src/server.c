@@ -6,20 +6,13 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:39:42 by aroque            #+#    #+#             */
-/*   Updated: 2020/05/18 11:37:04 by aroque           ###   ########.fr       */
+/*   Updated: 2020/05/22 18:41:37 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "server.h"
 #include "mlx.h"
-
-//static t_window	*new_window(void *mlx, unsigned int w, unsigned int h)
-//{
-//	t_window	*win;
-//
-//	return (win);
-//}
 
 t_server		*new_server(unsigned int width, unsigned int height)
 {

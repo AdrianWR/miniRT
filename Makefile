@@ -6,7 +6,7 @@
 #    By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/23 10:13:02 by aroque            #+#    #+#              #
-#    Updated: 2020/05/18 00:40:46 by aroque           ###   ########.fr        #
+#    Updated: 2020/05/22 18:31:13 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,12 +31,12 @@ CC			=	gcc
 CC_FLAGS	=	-c					\
 				-Wall				\
 				-Wextra				\
-				-g					\
 				-Werror				\
 				-I${MLX_DIR}		\
 				-I${LIBFT_DIR}		\
 				-I${HASH_DIR}		\
-				-I${INCLUDE_DIR}	
+				-I${INCLUDE_DIR}	\
+				-g
 
 LD_FLAGS	=	-L${LIBFT_DIR}	\
 				-L${HASH_DIR}	\
