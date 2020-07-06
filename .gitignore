@@ -1,4 +1,8 @@
+miniRT
 *~
 *.swo
 *.swp
 /build/*
+/lib/**/*.o
+/lib/**/*.a
+/lib/minilibx/test/*
