@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:20:31 by aroque            #+#    #+#             */
-/*   Updated: 2020/05/18 11:42:55 by aroque           ###   ########.fr       */
+/*   Updated: 2020/07/09 11:17:35 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct		s_image
 	int				bpp;
 	int				endian;
 	int				size_line;
+	unsigned int	width;
+	unsigned int	height;
 }					t_image;
 
 typedef struct		s_window
