@@ -6,7 +6,7 @@
 #    By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/23 10:13:02 by aroque            #+#    #+#              #
-#    Updated: 2020/05/22 18:31:13 by aroque           ###   ########.fr        #
+#    Updated: 2020/07/09 10:52:36 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,15 @@ MLX			=	${MLX_DIR}/libmlx_Linux.a
 LIBFT_DIR	=	${LIB_DIR}/libft
 LIBFT		=	${LIBFT_DIR}/libft.a
 
-HASH_DIR	=	${LIB_DIR}/hash
-HASH		=	${HASH_DIR}/libhash.a
-
-MODULES		=	${MLX_DIR} ${LIBFT_DIR} ${HASH_DIR}
+MODULES		=	${MLX_DIR} ${LIBFT_DIR}
 
 INCLUDE_DIR	=	./include
+INCLUDE		=	${INCLUDE_DIR}/camera.h \
+				${INCLUDE_DIR}/color.h	\
+				${INCLUDE_DIR}/ray.h	\
+				${INCLUDE_DIR}/server.h	\
+				${INCLUDE_DIR}/scene.h	\
+				${INCLUDE_DIR}/vector.h	\
 
 CC			=	gcc
 CC_FLAGS	=	-c					\
@@ -34,31 +37,29 @@ CC_FLAGS	=	-c					\
 				-Werror				\
 				-I${MLX_DIR}		\
 				-I${LIBFT_DIR}		\
-				-I${HASH_DIR}		\
 				-I${INCLUDE_DIR}	\
 				-g
 
 LD_FLAGS	=	-L${LIBFT_DIR}	\
-				-L${HASH_DIR}	\
 				-L${MLX_DIR}	\
 				-lm				\
 				-lft			\
-				-lhash			\
 				-lmlx_Linux		\
 				-lXext			\
 				-lX11
 
 SRC_DIR	=	./src
-SRC		=	${SRC_DIR}/minirt.c			\
-			${SRC_DIR}/scene.c			\
-			${SRC_DIR}/vector.c			\
+SRC		=	${SRC_DIR}/vector.c			\
 			${SRC_DIR}/add.c			\
+			${SRC_DIR}/ray.c			\
 			${SRC_DIR}/product.c		\
 			${SRC_DIR}/length.c			\
 			${SRC_DIR}/norm.c			\
 			${SRC_DIR}/get_next_line.c	\
 			${SRC_DIR}/server.c			\
 			${SRC_DIR}/color_map.c		\
+			${SRC_DIR}/skybox.c			\
+			${SRC_DIR}/minirt.c		\
 			${SRC_DIR}/hooks.c
 
 OBJ_DIR	=	./build
@@ -69,7 +70,7 @@ all: $(NAME)
 $(NAME): ${OBJ}
 	$(CC) $^ $(LD_FLAGS) -o $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c ${LIBFT} ${MLX} ${HASH}
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c ${LIBFT} ${MLX}
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CC_FLAGS) $< -o $@
 
@@ -78,9 +79,6 @@ $(LIBFT):
 
 $(MLX):
 	$(MAKE) -C $(MLX_DIR)
-
-$(HASH):
-	$(MAKE) -C $(HASH_DIR)
 
 clean:
 	for dir in $(MODULES); do	\
