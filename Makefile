@@ -6,7 +6,7 @@
 #    By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/23 10:13:02 by aroque            #+#    #+#              #
-#    Updated: 2020/07/10 11:49:28 by aroque           ###   ########.fr        #
+#    Updated: 2020/07/10 14:41:50 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ all: $(NAME)
 $(NAME): ${OBJ}
 	$(CC) $^ $(LD_FLAGS) -o $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c ${LIBFT} ${MLX}
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c ${LIBFT} ${MLX} ${INCLUDE}
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CC_FLAGS) $< -o $@
 
