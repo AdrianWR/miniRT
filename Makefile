@@ -6,7 +6,7 @@
 #    By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/23 10:13:02 by aroque            #+#    #+#              #
-#    Updated: 2020/07/09 10:52:36 by aroque           ###   ########.fr        #
+#    Updated: 2020/07/10 11:49:28 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,8 @@ SRC		=	${SRC_DIR}/vector.c			\
 			${SRC_DIR}/server.c			\
 			${SRC_DIR}/color_map.c		\
 			${SRC_DIR}/skybox.c			\
-			${SRC_DIR}/minirt.c		\
+			${SRC_DIR}/color.c			\
+			${SRC_DIR}/minirt.c			\
 			${SRC_DIR}/hooks.c
 
 OBJ_DIR	=	./build

@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 10:23:55 by aroque            #+#    #+#             */
-/*   Updated: 2020/07/09 10:45:25 by aroque           ###   ########.fr       */
+/*   Updated: 2020/07/10 11:47:59 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 
 typedef unsigned int t_color;
 
-void gradient(int start, int end, t_server *x);
+void	gradient(int start, int end, t_server *x);
+void	put_pixel(t_server *server, unsigned int x, unsigned int y, t_color color);
 
 #endif

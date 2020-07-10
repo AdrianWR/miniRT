@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 10:11:26 by aroque            #+#    #+#             */
-/*   Updated: 2020/07/09 17:37:24 by aroque           ###   ########.fr       */
+/*   Updated: 2020/07/10 11:50:13 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,17 @@ static int			linear_blend(int start, int end, float t)
 
 void gradient(int start, int end, t_server *x)
 {
-	char			*ptr;
 	float			t;
 	unsigned int	w;
 	unsigned int	h;
-	unsigned int 	dec;
-	unsigned int 	opp;
-	t_color			color;
 
-	opp = x->image->bpp / 8;
 	h = x->window->height;
 	while (h--)
 	{
 		t = (float) h / x->window->height;
-		color = mlx_get_color_value(x->mlx, linear_blend(start, end, t));
-		ptr = (x->image->data + h * x->image->size_line);
 		w = x->window->width;
 		while (w--)
-		{
-			dec = opp;
-			while (dec--)
-				*(ptr + w * opp + dec) = ((char *)(&color))[dec];
-		}
+			put_pixel(x, w, h, linear_blend(start, end, t));
 	}
 	mlx_put_image_to_window(x->mlx, x->window->window, x->image->image, 0, 0);
 }
