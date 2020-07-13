@@ -58,7 +58,6 @@ SRC		=	${SRC_DIR}/vector.c			\
 			${SRC_DIR}/get_next_line.c	\
 			${SRC_DIR}/server.c			\
 			${SRC_DIR}/color_map.c		\
-			${SRC_DIR}/skybox.c			\
 			${SRC_DIR}/color.c			\
 			${SRC_DIR}/minirt.c			\
 			${SRC_DIR}/hooks.c
