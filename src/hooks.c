@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:16:42 by aroque            #+#    #+#             */
-/*   Updated: 2020/07/08 11:01:36 by aroque           ###   ########.fr       */
+/*   Updated: 2020/07/10 16:24:50 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		exit_hook(t_server *x)
 	exit(0);
 }
 
-//static int		key_press_hook(int keycode, t_server *x)
+/*static int		key_press_hook(int keycode, t_server *x)
 //{
 //	static int color = 0;
 //	int	step = 0x00111111;
@@ -43,10 +43,11 @@ static int		exit_hook(t_server *x)
 //	printf("%0#8x\n", color);
 //	return (0);
 //}
+*/
 
 unsigned int	mlx_listen(t_server *x)
 {
-	//mlx_hook(x->window->window, KeyPress, KeyPressMask, key_press_hook, x);
+	/*mlx_hook(x->window->window, KeyPress, KeyPressMask, key_press_hook, x);*/
 	mlx_hook(x->window->window, DestroyNotify, StructureNotifyMask, exit_hook, x);
 	mlx_loop(x->mlx);
 	return (0);

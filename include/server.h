@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:20:31 by aroque            #+#    #+#             */
-/*   Updated: 2020/07/09 11:17:35 by aroque           ###   ########.fr       */
+/*   Updated: 2020/07/12 18:54:21 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ typedef struct		s_server
 t_server			*new_server(unsigned int width, unsigned int height);
 unsigned int		mlx_listen(t_server *x);
 void				color_map(t_server *x, int color);
+void				render(t_server *x);
 
 #endif

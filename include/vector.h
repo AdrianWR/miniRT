@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 15:56:30 by aroque            #+#    #+#             */
-/*   Updated: 2020/07/08 10:16:31 by aroque           ###   ########.fr       */
+/*   Updated: 2020/07/13 10:49:15 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_vector			sub(t_vector u, t_vector v);
 t_vector			scale(t_vector u, float c);
 t_vector			cross(t_vector u, t_vector v);
 float				dot(t_vector u, t_vector v);
+float				length_squared(t_vector u);
 float				length(t_vector u);
 t_vector			norm(t_vector u);
 

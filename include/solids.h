@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   length.c                                           :+:      :+:    :+:   */
+/*   solids.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/14 16:02:34 by aroque            #+#    #+#             */
-/*   Updated: 2020/07/13 10:52:02 by aroque           ###   ########.fr       */
+/*   Created: 2020/07/12 22:38:41 by aroque            #+#    #+#             */
+/*   Updated: 2020/07/13 11:18:20 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
-#include <math.h>
+#ifndef SOLIDS_H
+# define SOLIDS_H
 
-static float	sqr(float n)
-{
-	return (n * n);
-}
+# include "vector.h"
+# include "ray.h"
 
-float			length_squared(t_vector v)
-{
-	return (sqr(v.x) + sqr(v.y) + sqr(v.z));
-}
 
-float			length(t_vector v)
-{
-	return (sqrt(length_squared(v)));
-}
+
+typedef struct	s_solid {
+	void		*solid;
+	float		(*hit)();
+}				t_solid;
+
+typedef struct	s_sphere {
+	t_point		center;
+	float		radius;
+}				t_sphere;
+
+t_sphere		sphere(t_point center, float radius);
+//float			hit();
+float			hit_sphere(t_ray ray, t_sphere sphere);
+
+#endif

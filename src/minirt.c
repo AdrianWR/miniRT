@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 10:48:18 by aroque            #+#    #+#             */
-/*   Updated: 2020/07/09 15:40:09 by aroque           ###   ########.fr       */
+/*   Updated: 2020/07/13 09:30:51 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <math.h>
 #include <stdio.h>
 
-//t_color	ray_color(t_ray ray)
+/*t_color	ray_color(t_ray ray)
 //{
 //	t_vector direction;
 //	float t;
@@ -27,6 +27,7 @@
 //	return ((1 - t) * (0x92BEFE) + t * (0xFFFFFF));
 //	
 //}
+*/
 
 int		main(int argc, char *argv[])
 {
@@ -34,7 +35,8 @@ int		main(int argc, char *argv[])
 
 	(void) argc;
 	(void) argv;
-	x = new_server(WIDTH, HEIGHT);
-	gradient(0x0BA0E3, 0xC0D6E4, x);
+	x = new_server(800, 600);
+	render(x);
+	//draw_sphere();
 	mlx_listen(x);
 }

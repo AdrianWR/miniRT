@@ -6,7 +6,7 @@
 #    By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/23 10:13:02 by aroque            #+#    #+#              #
-#    Updated: 2020/07/10 14:41:50 by aroque           ###   ########.fr        #
+#    Updated: 2020/07/13 10:10:35 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ INCLUDE		=	${INCLUDE_DIR}/camera.h \
 				${INCLUDE_DIR}/scene.h	\
 				${INCLUDE_DIR}/vector.h	\
 
-CC			=	gcc
+CC			=	clang
 CC_FLAGS	=	-c					\
 				-Wall				\
 				-Wextra				\
@@ -60,6 +60,8 @@ SRC		=	${SRC_DIR}/vector.c			\
 			${SRC_DIR}/color_map.c		\
 			${SRC_DIR}/color.c			\
 			${SRC_DIR}/minirt.c			\
+			${SRC_DIR}/render.c			\
+			${SRC_DIR}/sphere.c			\
 			${SRC_DIR}/hooks.c
 
 OBJ_DIR	=	./build
