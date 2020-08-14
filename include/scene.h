@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 11:43:27 by aroque            #+#    #+#             */
-/*   Updated: 2020/05/15 11:31:02 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/14 00:33:40 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ typedef struct	s_scene {
 
 
 t_scene	*scene_initializer(const char *file);
+
 
 #endif

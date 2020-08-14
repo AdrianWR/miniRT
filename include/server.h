@@ -6,16 +6,19 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:20:31 by aroque            #+#    #+#             */
-/*   Updated: 2020/07/12 18:54:21 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/14 14:49:07 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SERVER_H
 # define SERVER_H
 
+# include "libft.h"
+
 # define WIDTH	800
 # define HEIGHT	600
 # define TITLE	"miniRT"
+
 
 typedef struct		s_image
 {
@@ -40,6 +43,7 @@ typedef struct		s_server
 	void			*mlx;
 	t_window		*window;
 	t_image			*image;
+	t_list			*world;
 }					t_server;
 
 t_server			*new_server(unsigned int width, unsigned int height);

@@ -6,25 +6,29 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:42:24 by aroque            #+#    #+#             */
-/*   Updated: 2020/07/13 10:53:23 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/14 00:15:45 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
-#include "solids.h"
+#include "hittables.h"
 #include "ray.h"
 #include <math.h>
+#include <stdlib.h>
 
-t_sphere		sphere(t_point center, float radius)
+t_sphere		*new_sphere(t_point center, float radius)
 {
-	t_sphere	sphere;
+	t_sphere	*sphere;
 
-	sphere.center = center;
-	sphere.radius = radius;
+	if (!(sphere = malloc(sizeof(*sphere))))
+		return NULL;
+	sphere->center = center;
+	sphere->radius = radius;
 	return (sphere);
 }
 
-float			hit_sphere(t_ray ray, t_sphere sphere)
+
+float			hit_sphere(t_ray ray, t_sphere *sphere)
 {
 	t_vector	oc;
 	float		a;
@@ -32,10 +36,10 @@ float			hit_sphere(t_ray ray, t_sphere sphere)
 	float		c;
 	float		discriminant;
 
-	oc = sub(ray.origin, sphere.center);
+	oc = sub(ray.origin, sphere->center);
 	a = length_squared(ray.direction);
 	half_b = dot(oc, ray.direction);
-	c = length_squared(oc) - sphere.radius * sphere.radius;
+	c = length_squared(oc) - sphere->radius * sphere->radius;
 	discriminant = half_b * half_b - a * c;
 	if (discriminant < 0)
 		return (-1);
