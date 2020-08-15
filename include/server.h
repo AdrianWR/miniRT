@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:20:31 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/14 14:49:07 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/14 15:38:35 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include "libft.h"
 
-# define WIDTH	800
-# define HEIGHT	600
 # define TITLE	"miniRT"
 
 

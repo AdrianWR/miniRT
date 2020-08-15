@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:44:08 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/14 15:00:59 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/14 22:58:45 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,40 +40,34 @@ static 		t_color gradient(t_color start, t_color end, t_ray ray)
 
 t_color 			ray_color(t_ray ray, t_list *world)
 {
-	int i;
-	float t;
-	t_vector n;
-	t_color pixel_color;
-	t_sphere *sphere;
-
+	t_vector	n;
+	t_color		pixel_color;
+	t_hit		*record;
    
-	i = 0;
-	while (world->content)
+	record = malloc(sizeof(*record));
+	if (hit_world(ray, world, record))
 	{
-		sphere = (t_sphere *) world->content;
-		t = hit_sphere(ray, sphere);
-		if (t > 0)
-		{
-			n = norm(sub(calculate(ray, t), sphere->center));
-			pixel_color = (scale(color(n.x + 1, n.y + 1, n.z + 1), 0.5));
-		}
-		else
-			pixel_color =  (gradient(color(0.5, 0.7, 1), color(1, 1, 1), ray));
-		world = world->next;
+		n = record->normal;
+		pixel_color = (scale(color(n.x + 1, n.y + 1, n.z + 1), 0.5));
 	}
+	else
+		pixel_color =  (gradient(color(0.5, 0.7, 1), color(1, 1, 1), ray));
+	world = world->next;
+	free(record);
 	return pixel_color;
 }
 
 
 void			render(t_server *x)
 {
-	int	i;
-	int	j;
+	unsigned int	i;
+	unsigned int	j;
 	float vpy;
 	float vpx;
 	float aspect_ratio;
 	float focal_length;
 	t_ray ray;
+	t_point llc;
 
 	aspect_ratio = (float)x->window->width / x->window->height;
 	vpy = 2.0;
@@ -84,21 +78,25 @@ void			render(t_server *x)
 
 	t_vector horizontal = vector(vpx, 0, 0);
 	t_vector vertical = vector(0, vpy, 0);
-	t_point llc = add(scale(vertical, 0.5), vector(0, 0, focal_length));
-	llc = add(scale(horizontal, 0.5), llc);
-	llc = scale(add(ray.origin, llc), -1);
-	j = x->window->height;
-	while (j--)
+	llc = sub(ray.origin, scale(horizontal, 0.5));
+	llc = sub(llc, scale(vertical, 0.5));
+	llc = sub(llc, vector(0, 0, focal_length));
+	j = 0;
+	while (j < x->window->height)
 	{
-		i = x->window->width;
-		while (i--)
+		i = 0;
+		//i = x->window->width;
+		while (i < x->window->width)
 		{
 			float u = (float) i / (x->window->width - 1);
 			float v = (float) j / (x->window->height - 1);
-			ray.direction = add(llc, scale(horizontal, u));
-			ray.direction = add(ray.direction, scale(vertical, v));
+			ray.direction = add(scale(horizontal, u), scale(vertical, v));
+			ray.direction = add(ray.direction, llc);
+			ray.direction = sub(ray.direction, ray.origin);
 			put_pixel(x, i, j, ray_color(ray, x->world));
+			i++;
 		}
+		j++;
 	}
 	mlx_put_image_to_window(x->mlx, x->window->window, x->image->image, 0, 0);
 }

@@ -6,14 +6,14 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 11:06:11 by aroque            #+#    #+#             */
-/*   Updated: 2020/07/08 10:12:28 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/14 17:02:13 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 #include "ray.h"
 
-t_point	calculate(t_ray ray, float t)
+t_point	intersection(t_ray ray, float t)
 {
 	t_point p;
 
