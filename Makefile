@@ -6,7 +6,7 @@
 #    By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/23 10:13:02 by aroque            #+#    #+#              #
-#    Updated: 2020/08/14 21:11:09 by aroque           ###   ########.fr        #
+#    Updated: 2020/08/15 14:19:42 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,8 +55,8 @@ SRC		=	${SRC_DIR}/vector.c			\
 			${SRC_DIR}/product.c		\
 			${SRC_DIR}/length.c			\
 			${SRC_DIR}/norm.c			\
-			${SRC_DIR}/get_next_line.c	\
 			${SRC_DIR}/server.c			\
+			${SRC_DIR}/camera.c			\
 			${SRC_DIR}/color.c			\
 			${SRC_DIR}/minirt.c			\
 			${SRC_DIR}/render.c			\

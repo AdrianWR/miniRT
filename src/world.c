@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 11:18:50 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/14 22:15:04 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/15 23:56:02 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 void		new_world(t_list **world)
 {
 	ft_lstadd_back(world, ft_lstnew(new_sphere(point(0, 0, -1), 0.5)));
+	//ft_lstadd_back(world, ft_lstnew(new_sphere(point(3, 0, -1), 1)));
 	ft_lstadd_back(world, ft_lstnew(new_sphere(point(0, -100.5, -1), 100)));
 }
