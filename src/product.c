@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 16:10:47 by aroque            #+#    #+#             */
-/*   Updated: 2020/05/14 16:29:40 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/16 21:24:38 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_vector	cross(t_vector u, t_vector v)
 	t_vector	w;
 
 	w.x = (u.y * v.z) - (u.z * v.y);
-	w.x = (u.z * v.x) - (u.x * v.z);
-	w.x = (u.x * v.y) - (u.y * v.x);
+	w.y = (u.z * v.x) - (u.x * v.z);
+	w.z = (u.x * v.y) - (u.y * v.x);
 	return (w);
 }

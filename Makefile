@@ -6,7 +6,7 @@
 #    By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/23 10:13:02 by aroque            #+#    #+#              #
-#    Updated: 2020/08/15 14:19:42 by aroque           ###   ########.fr        #
+#    Updated: 2020/08/16 20:26:56 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,8 +62,7 @@ SRC		=	${SRC_DIR}/vector.c			\
 			${SRC_DIR}/render.c			\
 			${SRC_DIR}/sphere.c			\
 			${SRC_DIR}/world.c			\
-			${SRC_DIR}/hit.c			\
-			${SRC_DIR}/hooks.c
+			${SRC_DIR}/listen.c
 
 OBJ_DIR	=	./build
 OBJ		=	$(patsubst ${SRC_DIR}/%.c, ${OBJ_DIR}/%.o, ${SRC})

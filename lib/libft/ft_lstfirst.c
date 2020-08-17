@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   world.h                                            :+:      :+:    :+:   */
+/*   ft_lstfirst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/14 00:33:58 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/16 18:59:06 by aroque           ###   ########.fr       */
+/*   Created: 2020/08/16 17:42:24 by aroque            #+#    #+#             */
+/*   Updated: 2020/08/16 17:49:30 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WORLD_H
-# define WORLD_H
+#include "libft.h"
 
-typedef struct	s_world {
-	t_list		*figures;
-	t_list		*lights;
-	t_color		ambient_light;
-}				t_world;
+/*
+**	Returns the first element
+**	of the linked list lst.
+*/
 
-void		new_world(t_list **world);
-
-#endif
+t_list	*ft_lstfirst(t_list *lst)
+{
+	if (!lst)
+		return (NULL);
+	else if (!(lst->previous))
+		return (lst);
+	return (ft_lstfirst(lst->previous));
+}

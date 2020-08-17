@@ -6,15 +6,15 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:20:31 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/15 15:37:00 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/16 15:28:15 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SERVER_H
 # define SERVER_H
 
+# include "mlx.h"
 # include "libft.h"
-// include "camera.h"
 
 # define TITLE	"miniRT"
 
@@ -42,6 +42,7 @@ typedef struct		s_server
 	t_window		*window;
 	t_image			*image;
 	t_list			*world;
+	t_list			*camera_set;
 }					t_server;
 
 t_server			*new_server(unsigned int width, unsigned int height);

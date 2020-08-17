@@ -6,7 +6,7 @@
 #    By: aroque <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 11:20:51 by aroque            #+#    #+#              #
-#    Updated: 2020/02/15 14:40:42 by aroque           ###   ########.fr        #
+#    Updated: 2020/08/16 17:43:56 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRC		=	${SRC_DIR}/ft_memset.c		\
 			${SRC_DIR}/ft_lstnew.c		\
 			${SRC_DIR}/ft_lstadd_front.c\
 			${SRC_DIR}/ft_lstsize.c		\
+			${SRC_DIR}/ft_lstfirst.c	\
 			${SRC_DIR}/ft_lstlast.c		\
 			${SRC_DIR}/ft_lstadd_back.c	\
 			${SRC_DIR}/ft_lstdelone.c	\
