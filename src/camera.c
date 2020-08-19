@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 14:02:59 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/16 21:56:30 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/18 17:37:32 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ t_ray			generate_ray(t_camera *cam, float u, float v)
 	ray.direction = add(scale(horizontal, u), scale(vertical, v));
 	ray.direction = add(ray.direction, llc);
 	ray.direction = sub(ray.direction, ray.origin);
-	//ray.direction.y *= +1;
 	return (ray);
 }
 

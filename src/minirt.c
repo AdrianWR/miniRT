@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 10:48:18 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/16 17:51:39 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/19 13:46:53 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int		main(int argc, char *argv[])
 	(void) argc;
 	(void) argv;
 
+	t_vector col = color2vector(hex2color(0x00880000));
+	(void) col;
 	x = new_server(1200, 800);
 	world = NULL;
 	cam_set = NULL;

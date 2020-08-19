@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:44:08 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/16 22:13:57 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/19 17:21:25 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 #include "color.h"
 #include "camera.h"
 #include "figures.h"
+#include "light.h"
 #include <stdio.h>
 #include <unistd.h>
+#include <math.h>
 
 //static 		t_color gradient(t_color start, t_color end, t_ray ray)
 //{
@@ -28,35 +30,61 @@
 //	t = 0.5 * (unit.y + 1);
 //	return add(scale(start, 1 - t), scale(end, t));
 //}
+//
+int		cproduct(int color, double coef)
+{
+	int mask;
+	int r;
+	int	g;
+	int	b;
 
+	mask = 255;
+	r = coef * ((color & (mask << 16)) >> 16);
+	g = coef * ((color & (mask << 8)) >> 8);
+	b = coef * (color & mask);
+	r = r > 255 ? 255 : r;
+	g = g > 255 ? 255 : g;
+	b = b > 255 ? 255 : b;
+	return ((r << 16) | (g << 8) | b);
+}
+
+float light_intensity(t_hit record)
+{
+
+	t_light		light;
+
+
+	//float		light_intensity;
+	t_vector	light_direction;
+	//t_vector	light_color;
+	float		r2;
+
+	light.position = point(2, 5, -1);
+	light.brightness = 0.6;
+
+	light_direction = sub(light.position, record.p);
+	r2 = length_squared(light_direction);
+	light_direction = norm(light_direction);
+
+	float dotnormal = dot(light_direction, record.normal);
+	if (dotnormal < 0)
+		return (0);
+	return ((light.brightness * dotnormal * 1000) / (4.0 * M_PI * r2));
+}
 
 t_color 			raytrace(t_ray *ray, t_color background, t_list *world, int depth)
 {
 	t_color		pixel_color;
 	t_hit		record;
 
-	//t_point		light_position = point(0, 5, -1);
 	//t_color		light_color = hex2color(0x00FFFFFF);
 
 	if (depth <= 0)
 		return hex2color(0x0);
 	if (!intersect(ray, world, &record))
 		return background;
-
-	//t_vector light_direction = sub(light_position, record.p);
-	//let r2 = (s.position - *hit_point).norm() as f32;
-	//s.intensity / (4.0 * ::std::f32::consts::PI * r2)
-	float		light_intensity = 0.1;
-	t_vector	light_direction = vector(-0.5, -1, 0);
-
-	float light_power = dot(light_direction, record.normal) * light_intensity;
-//let color = intersection.element.color() * scene.light.color *
- //           light_power * light_reflected;
-	//let light_power = (surface_normal.dot(&direction_to_light) as f32) *
-    //scene.light.intensity;
-
 	pixel_color = ((t_sphere *)record.object)->color;
-	pixel_color = color_scale(pixel_color, light_power);
+	pixel_color.hex = cproduct(pixel_color.hex, light_intensity(record));
 	world = world->next;
 	return (pixel_color);
 }

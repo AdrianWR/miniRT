@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:48:45 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/16 20:44:48 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/19 16:28:02 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ t_vector	color2vector(t_color color)
 {
 	t_vector	vector;
 
-	vector.x = color.rgb.r / 255;
-	vector.y = color.rgb.g / 255;
-	vector.z = color.rgb.b / 255;
+	vector.x = (float)color.rgb.r / 255;
+	vector.y = (float)color.rgb.g / 255;
+	vector.z = (float)color.rgb.b / 255;
 	return (vector);
 }
 
@@ -52,6 +52,7 @@ t_color		color_scale(t_color color, float c)
 	result.rgb.r = color.rgb.r * c;
 	result.rgb.g = color.rgb.g * c;
 	result.rgb.b = color.rgb.b * c;
+	
 	return (result);
 }
 
