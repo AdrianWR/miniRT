@@ -6,7 +6,7 @@
 #    By: aroque <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 11:20:51 by aroque            #+#    #+#              #
-#    Updated: 2020/08/16 17:43:56 by aroque           ###   ########.fr        #
+#    Updated: 2020/08/20 17:19:09 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,8 @@ SRC		=	${SRC_DIR}/ft_memset.c		\
 			${SRC_DIR}/ft_lstdelone.c	\
 			${SRC_DIR}/ft_lstclear.c	\
 			${SRC_DIR}/ft_lstiter.c		\
-			${SRC_DIR}/ft_lstmap.c
+			${SRC_DIR}/ft_lstmap.c		\
+			${SRC_DIR}/get_next_line.c
 
 OBJ_DIR =	.
 OBJ		=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))

@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 11:18:50 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/19 23:23:35 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/20 00:49:14 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ t_list	*new_light_set(void)
 	t_list *light_set;
 
 	light_set = NULL;
-	ft_lstadd_back(&light_set, ft_lstnew(
-				new_light(point(3, 3, -1), 0.5, 0x0000FF00)));
 	//ft_lstadd_back(&light_set, ft_lstnew(
-//				new_light(point(-5, 5, -1), 0.5, 0x0000FF00)));
+	//			new_light(point(2, 1, 2), 0.2, 0x0000FF00)));
+	ft_lstadd_back(&light_set, ft_lstnew(
+				new_light(point(-5, 5, -1), 0.5, 0x0000FF00)));
 	return (light_set);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:44:08 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/19 23:24:36 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/20 00:48:03 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,28 @@
 #include <unistd.h>
 #include <math.h>
 
+static t_ray shadow_ray(t_light light, t_hit record)
+{
+	t_ray shadow;
 
-//static t_ray shadow_ray(t_light light, t_hit record)
-//{
-//	t_ray shadow;
-//
-//	shadow.origin = add(record.p, scale(record.normal, 0.0001));
-//	//shadow.origin = record.p;
-//	//shadow.direction = norm(sub(record.p, light.position));
-//	shadow.direction = norm(sub(light.position, record.p));
-//	return (shadow);
-//}
+	shadow.origin = add(record.p, scale(record.normal, 0.0001));
+	//shadow.origin = record.p;
+	//shadow.direction = norm(sub(record.p, light.position));
+	shadow.direction = norm(sub(light.position, record.p));
+	return (shadow);
+}
 
 t_color 			raytrace(t_ray *ray, t_world *world, int depth)
 {
 	t_hit		record;
 	t_color color;
 	t_color object_color;
-	//t_ray shadow;
+	t_ray shadow;
 	t_list *light;
 	bool vis;
 
 	vis = 1;
-	if (depth < 0)
+	if (depth <= 0)
 		return (0x0);
 	if (!intersect(ray, world->figures, &record))
 		return (0x0);
@@ -51,12 +50,12 @@ t_color 			raytrace(t_ray *ray, t_world *world, int depth)
 	object_color = ((t_sphere *)record.object)->color;
 	while (light)
 	{
-		//shadow = shadow_ray(*((t_light *) light->content), record);
-		//vis = raytrace(&shadow, world, depth - 1);
-		//if (vis)
-		//	vis = 1;
+		shadow = shadow_ray(*((t_light *) light->content), record);
+		vis = !raytrace(&shadow, world, depth - 1);
 		color = cadd(color, cproduct(object_color, light_intensity((t_light *)light->content, record)));
-		color *= vis;
+		//if (!vis)
+		//	color = 0;
+		//color *= vis;
 		light = light->next;
 	}	
 	return (color);
@@ -82,7 +81,7 @@ void				render(t_server *x)
 			u = (float) i / x->window->width;
 			v = (float) j / x->window->height;
 			ray = generate_ray(x->world->cameras->content, u, v);
-			pixel_color = raytrace(&ray, x->world, 1);
+			pixel_color = raytrace(&ray, x->world, 2);
 			put_pixel(x, i, x->window->height - 1 - j, pixel_color);
 		}
 	}

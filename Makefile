@@ -6,7 +6,7 @@
 #    By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/23 10:13:02 by aroque            #+#    #+#              #
-#    Updated: 2020/08/19 18:38:06 by aroque           ###   ########.fr        #
+#    Updated: 2020/08/20 17:15:47 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,10 @@ MLX			=	${MLX_DIR}/libmlx_Linux.a
 LIBFT_DIR	=	${LIB_DIR}/libft
 LIBFT		=	${LIBFT_DIR}/libft.a
 
-MODULES		=	${MLX_DIR} ${LIBFT_DIR}
+LIBVECTOR_DIR	=	${LIB_DIR}/libvector
+LIBVECTOR		=	${LIBVECTOR_DIR}/libvector.a
+
+MODULES		=	${MLX_DIR} ${LIBFT_DIR} ${LIBVECTOR_DIR}
 
 INCLUDE_DIR	=	./include
 INCLUDE		=	${INCLUDE_DIR}/camera.h \
@@ -28,7 +31,7 @@ INCLUDE		=	${INCLUDE_DIR}/camera.h \
 				${INCLUDE_DIR}/ray.h	\
 				${INCLUDE_DIR}/server.h	\
 				${INCLUDE_DIR}/scene.h	\
-				${INCLUDE_DIR}/vector.h	\
+				${INCLUDE_DIR}/vector.h	
 
 CC			=	clang
 CC_FLAGS	=	-c					\
@@ -37,25 +40,23 @@ CC_FLAGS	=	-c					\
 				-Werror				\
 				-I${MLX_DIR}		\
 				-I${LIBFT_DIR}		\
+				-I${LIBVECTOR_DIR}	\
 				-I${INCLUDE_DIR}	\
 				-g
 
-LD_FLAGS	=	-L${LIBFT_DIR}	\
-				-L${MLX_DIR}	\
-				-lm				\
-				-lft			\
-				-lmlx_Linux		\
-				-lXext			\
+LD_FLAGS	=	-L${LIBFT_DIR}		\
+				-L${LIBVECTOR_DIR}	\
+				-L${MLX_DIR}		\
+				-lm					\
+				-lft				\
+				-lvector			\
+				-lmlx_Linux			\
+				-lXext				\
 				-lX11
 
 SRC_DIR	=	./src
-SRC		=	${SRC_DIR}/vector.c			\
-			${SRC_DIR}/add.c			\
+SRC		= 	${SRC_DIR}/server.c			\
 			${SRC_DIR}/ray.c			\
-			${SRC_DIR}/product.c		\
-			${SRC_DIR}/length.c			\
-			${SRC_DIR}/norm.c			\
-			${SRC_DIR}/server.c			\
 			${SRC_DIR}/camera.c			\
 			${SRC_DIR}/color.c			\
 			${SRC_DIR}/minirt.c			\
@@ -73,7 +74,7 @@ all: $(NAME)
 $(NAME): ${OBJ}
 	$(CC) $^ $(LD_FLAGS) -o $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c ${LIBFT} ${MLX} ${INCLUDE}
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c ${LIBFT} ${LIBVECTOR} ${MLX}
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CC_FLAGS) $< -o $@
 
@@ -82,6 +83,9 @@ $(LIBFT):
 
 $(MLX):
 	$(MAKE) -C $(MLX_DIR)
+
+$(LIBVECTOR):
+	$(MAKE) -C $(LIBVECTOR_DIR)
 
 clean:
 	for dir in $(MODULES); do	\
