@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   listen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:16:42 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/16 17:51:06 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/19 18:37:42 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 
 static int		exit_hook(t_server *x)
 {
-	t_list *cam;
+	//t_list *cam;
 
-	cam = ft_lstfirst(x->camera_set);
+	//cam = ft_lstfirst(x->camera_set);
 	mlx_destroy_image(x->mlx, x->image->image);
 	mlx_clear_window(x->mlx, x->window->window);
 	mlx_destroy_window(x->mlx, x->window->window);
-	ft_lstclear(&x->world, free);
-	ft_lstclear(&cam, free);
+	//ft_lstclear(&x->world, free);
+	//ft_lstclear(&cam, free);
 	free(x->window);
 	free(x->image);
 	free(x);

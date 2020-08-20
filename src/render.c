@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:44:08 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/19 17:21:25 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/19 23:24:36 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,73 +20,47 @@
 #include <unistd.h>
 #include <math.h>
 
-//static 		t_color gradient(t_color start, t_color end, t_ray ray)
+
+//static t_ray shadow_ray(t_light light, t_hit record)
 //{
-//	float		t;
-//	t_vector unit;
+//	t_ray shadow;
 //
-//	unit = norm(ray.direction);
-//
-//	t = 0.5 * (unit.y + 1);
-//	return add(scale(start, 1 - t), scale(end, t));
+//	shadow.origin = add(record.p, scale(record.normal, 0.0001));
+//	//shadow.origin = record.p;
+//	//shadow.direction = norm(sub(record.p, light.position));
+//	shadow.direction = norm(sub(light.position, record.p));
+//	return (shadow);
 //}
-//
-int		cproduct(int color, double coef)
+
+t_color 			raytrace(t_ray *ray, t_world *world, int depth)
 {
-	int mask;
-	int r;
-	int	g;
-	int	b;
-
-	mask = 255;
-	r = coef * ((color & (mask << 16)) >> 16);
-	g = coef * ((color & (mask << 8)) >> 8);
-	b = coef * (color & mask);
-	r = r > 255 ? 255 : r;
-	g = g > 255 ? 255 : g;
-	b = b > 255 ? 255 : b;
-	return ((r << 16) | (g << 8) | b);
-}
-
-float light_intensity(t_hit record)
-{
-
-	t_light		light;
-
-
-	//float		light_intensity;
-	t_vector	light_direction;
-	//t_vector	light_color;
-	float		r2;
-
-	light.position = point(2, 5, -1);
-	light.brightness = 0.6;
-
-	light_direction = sub(light.position, record.p);
-	r2 = length_squared(light_direction);
-	light_direction = norm(light_direction);
-
-	float dotnormal = dot(light_direction, record.normal);
-	if (dotnormal < 0)
-		return (0);
-	return ((light.brightness * dotnormal * 1000) / (4.0 * M_PI * r2));
-}
-
-t_color 			raytrace(t_ray *ray, t_color background, t_list *world, int depth)
-{
-	t_color		pixel_color;
 	t_hit		record;
+	t_color color;
+	t_color object_color;
+	//t_ray shadow;
+	t_list *light;
+	bool vis;
 
-	//t_color		light_color = hex2color(0x00FFFFFF);
-
-	if (depth <= 0)
-		return hex2color(0x0);
-	if (!intersect(ray, world, &record))
-		return background;
-	pixel_color = ((t_sphere *)record.object)->color;
-	pixel_color.hex = cproduct(pixel_color.hex, light_intensity(record));
-	world = world->next;
-	return (pixel_color);
+	vis = 1;
+	if (depth < 0)
+		return (0x0);
+	if (!intersect(ray, world->figures, &record))
+		return (0x0);
+	light = world->lights;
+	color = 0x0;
+	object_color = ((t_sphere *)record.object)->color;
+	while (light)
+	{
+		//shadow = shadow_ray(*((t_light *) light->content), record);
+		//vis = raytrace(&shadow, world, depth - 1);
+		//if (vis)
+		//	vis = 1;
+		color = cadd(color, cproduct(object_color, light_intensity((t_light *)light->content, record)));
+		color *= vis;
+		light = light->next;
+	}	
+	return (color);
+	//color = light_object(world->lights, record);
 }
 
 
@@ -98,9 +72,7 @@ void				render(t_server *x)
 	float			v;
 	t_ray			ray;
 	t_color			pixel_color;
-	t_color			background;
 
-	background.hex = 0x00C3EFFC;
 	j = x->window->height;
 	while (--j)
 	{
@@ -109,8 +81,8 @@ void				render(t_server *x)
 		{
 			u = (float) i / x->window->width;
 			v = (float) j / x->window->height;
-			ray = generate_ray(x->camera_set->content, u, v);
-			pixel_color = raytrace(&ray, background, x->world, MAX_RAY_DEPTH);
+			ray = generate_ray(x->world->cameras->content, u, v);
+			pixel_color = raytrace(&ray, x->world, 1);
 			put_pixel(x, i, x->window->height - 1 - j, pixel_color);
 		}
 	}

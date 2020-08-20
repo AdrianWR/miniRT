@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 14:02:59 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/18 17:37:32 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/19 18:30:20 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,8 @@ static float	deg2rad(float deg)
 	return ((M_PI / 180) * deg);
 }
 
-void		new_camera_set(t_list **cam_set, t_server *x)
-{
-	ft_lstadd_back(cam_set, ft_lstnew(
-		new_camera(point(0, 0, 0), vector(0.5, 0, -1), 60, x)));
-	ft_lstadd_back(cam_set, ft_lstnew(
-		new_camera(point(0, 0, 0), vector(0, 0, -1), 60, x)));
-	ft_lstadd_back(cam_set, ft_lstnew(
-		new_camera(point(0, 0, 0), vector(-0.5, 0, -1), 60, x)));
-	ft_lstadd_back(cam_set, ft_lstnew(
-		new_camera(point(0, 10, 10), vector(0, -0.5, -1), 60, x)));
-	ft_lstadd_back(cam_set, ft_lstnew(
-		new_camera(point(0, 10, 10), vector(-0.25, -0.5, -1), 60, x)));
-}
-
-t_camera		*new_camera(t_point origin, t_vector direction, float fov, t_server *x)
+t_camera		*new_camera(t_point origin, t_vector direction, float fov,
+							unsigned int width, unsigned int height)
 {
 	t_camera	*camera;
 
@@ -51,7 +38,7 @@ t_camera		*new_camera(t_point origin, t_vector direction, float fov, t_server *x
 	float	vpx;
 
 	vpx = 2 * tan(camera->fov / 2);
-	vpy = (vpx * (float)x->window->height) / (float)x->window->width;
+	vpy = (vpx * (float)height) / (float)width;
 
 	camera->direction = scale(camera->direction, -1);
 	t_vector w = norm(camera->direction);
@@ -88,7 +75,7 @@ void			change_camera(t_server *x, int step)
 {
 	t_list **cam;
 
-	cam = &(x->camera_set);
+	cam = &(x->world->cameras);
 	if (step > 0)
 		while (step-- && (*cam)->next)
 			*cam = ((*cam)->next);

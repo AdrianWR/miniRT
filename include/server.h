@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:20:31 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/19 17:10:34 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/19 17:42:35 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SERVER_H
 
 # include "mlx.h"
+# include "world.h"
 # include "libft.h"
 
 # define TITLE	"miniRT"
@@ -41,13 +42,12 @@ typedef struct		s_server
 	void			*mlx;
 	t_window		*window;
 	t_image			*image;
-	t_list			*world;
-	t_list			*camera_set;
-	t_list			*light_set;
+	t_world			*world;
 }					t_server;
 
 t_server			*new_server(unsigned int width, unsigned int height);
 unsigned int		mlx_listen(t_server *x);
 void				color_map(t_server *x, int color);
+void				put_pixel		(t_server *server, unsigned int x, unsigned int y, t_color color);
 
 #endif

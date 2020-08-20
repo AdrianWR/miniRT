@@ -6,7 +6,7 @@
 #    By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/23 10:13:02 by aroque            #+#    #+#              #
-#    Updated: 2020/08/16 20:26:56 by aroque           ###   ########.fr        #
+#    Updated: 2020/08/19 18:38:06 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRC		=	${SRC_DIR}/vector.c			\
 			${SRC_DIR}/color.c			\
 			${SRC_DIR}/minirt.c			\
 			${SRC_DIR}/render.c			\
+			${SRC_DIR}/light.c			\
 			${SRC_DIR}/sphere.c			\
 			${SRC_DIR}/world.c			\
 			${SRC_DIR}/listen.c

@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:39:42 by aroque            #+#    #+#             */
-/*   Updated: 2020/07/09 14:15:49 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/19 22:02:55 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,16 @@ t_server		*new_server(unsigned int width, unsigned int height)
 	x->window = win;
 	x->image = new_image(x);
 	return (x);
+}
+
+void	put_pixel(t_server *s, unsigned int x, unsigned int y, t_color color)
+{
+	char			*color_addr;
+	unsigned int 	hex_color;
+	unsigned int 	opp;
+	
+	opp = s->image->bpp / 8;
+	color_addr = (s->image->data + y * s->image->size_line + x * opp);
+	hex_color = mlx_get_color_value(s->mlx, color);
+	ft_memcpy(color_addr, &hex_color, opp);
 }

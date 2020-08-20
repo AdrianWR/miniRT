@@ -6,12 +6,17 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 18:49:11 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/19 17:17:01 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/19 22:44:17 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "light.h"
+#include "vector.h"
+#include "color.h"
 #include "libft.h"
+#include "ray.h"
+#include "figures.h"
+#include <math.h>
 
 t_light		*new_light(t_point position, float brightness, t_color color)
 {
@@ -25,12 +30,32 @@ t_light		*new_light(t_point position, float brightness, t_color color)
 	return (light);
 }
 
-t_list	*new_light_set(void)
+float light_intensity(t_light *light, t_hit record)
 {
-	t_list *light_set;
+	t_vector	light_direction;
+	float		r2;
 
-	light_set = NULL;
-	ft_lstadd_back(&light_set, ft_lstnew(
-				new_light(point(2, 5, -1), 0.5, hex2color(0x0000FF00))));
-	return (light_set);
+	light_direction = sub(light->position, record.p);
+	r2 = length_squared(light_direction);
+	light_direction = norm(light_direction);
+
+	float dotnormal = dot(light_direction, record.normal);
+	if (dotnormal < 0)
+		return (0);
+	return ((light->brightness * dotnormal * 1000) / (4.0 * M_PI * r2));
+}
+
+t_color light_object(t_list *light, t_hit record)
+{
+	t_color color;
+	t_color object_color;
+
+	color = 0x0;
+	object_color = ((t_sphere *)record.object)->color;
+	while (light)
+	{
+		color = cadd(color, cproduct(object_color, light_intensity((t_light *)light->content, record)));
+		light = light->next;
+	}	
+	return (color);
 }
