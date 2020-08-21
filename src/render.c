@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:44:08 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/20 00:48:03 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/21 00:12:05 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_color 			raytrace(t_ray *ray, t_world *world, int depth)
 	t_color object_color;
 	t_ray shadow;
 	t_list *light;
-	bool vis;
+	t_color vis;
 
 	vis = 1;
 	if (depth <= 0)
@@ -51,11 +51,14 @@ t_color 			raytrace(t_ray *ray, t_world *world, int depth)
 	while (light)
 	{
 		shadow = shadow_ray(*((t_light *) light->content), record);
-		vis = !raytrace(&shadow, world, depth - 1);
-		color = cadd(color, cproduct(object_color, light_intensity((t_light *)light->content, record)));
-		//if (!vis)
-		//	color = 0;
-		//color *= vis;
+		//vis = raytrace(&shadow, world, depth - 1);
+		//if (vis > 0)
+		//	vis = 0;
+		//else
+		//	vis = 1;
+		color = cadd(color, cscale(object_color, light_intensity((t_light *)light->content, record)));
+		color *= vis;
+		color = cproduct(color, ((t_light *)light->content)->color);
 		light = light->next;
 	}	
 	return (color);

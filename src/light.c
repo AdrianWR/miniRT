@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 18:49:11 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/19 22:44:17 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/20 23:19:07 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_color light_object(t_list *light, t_hit record)
 	object_color = ((t_sphere *)record.object)->color;
 	while (light)
 	{
-		color = cadd(color, cproduct(object_color, light_intensity((t_light *)light->content, record)));
+		color = cadd(color, cscale(object_color, light_intensity((t_light *)light->content, record)));
 		light = light->next;
 	}	
 	return (color);
