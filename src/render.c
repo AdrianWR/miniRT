@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:44:08 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/21 00:12:05 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/21 11:10:11 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,49 +20,49 @@
 #include <unistd.h>
 #include <math.h>
 
-static t_ray shadow_ray(t_light light, t_hit record)
-{
-	t_ray shadow;
-
-	shadow.origin = add(record.p, scale(record.normal, 0.0001));
-	//shadow.origin = record.p;
-	//shadow.direction = norm(sub(record.p, light.position));
-	shadow.direction = norm(sub(light.position, record.p));
-	return (shadow);
-}
+//static t_ray shadow_ray(t_light light, t_hit record)
+//{
+//	t_ray shadow;
+//
+//	shadow.origin = add(record.p, scale(record.normal, 0.0001));
+//	//shadow.origin = record.p;
+//	//shadow.direction = norm(sub(record.p, light.position));
+//	shadow.direction = norm(sub(light.position, record.p));
+//	return (shadow);
+//}
 
 t_color 			raytrace(t_ray *ray, t_world *world, int depth)
 {
 	t_hit		record;
 	t_color color;
-	t_color object_color;
-	t_ray shadow;
-	t_list *light;
-	t_color vis;
+	//t_color object_color;
+	//t_ray shadow;
+	//t_list *light;
+	//t_color vis;
 
-	vis = 1;
+	//vis = 1;
 	if (depth <= 0)
 		return (0x0);
 	if (!intersect(ray, world->figures, &record))
 		return (0x0);
-	light = world->lights;
-	color = 0x0;
-	object_color = ((t_sphere *)record.object)->color;
-	while (light)
-	{
-		shadow = shadow_ray(*((t_light *) light->content), record);
-		//vis = raytrace(&shadow, world, depth - 1);
-		//if (vis > 0)
-		//	vis = 0;
-		//else
-		//	vis = 1;
-		color = cadd(color, cscale(object_color, light_intensity((t_light *)light->content, record)));
-		color *= vis;
-		color = cproduct(color, ((t_light *)light->content)->color);
-		light = light->next;
-	}	
+	color = generate_light(*world->ambience, world->lights, record);
+	//light = world->lights;
+	//color = 0x0;
+	//object_color = ((t_sphere *)record.object)->color;
+	//while (light)
+	//{
+	//	shadow = shadow_ray(*((t_light *) light->content), record);
+	//	//vis = raytrace(&shadow, world, depth - 1);
+	//	//if (vis > 0)
+	//	//	vis = 0;
+	//	//else
+	//	//	vis = 1;
+	//	color = cadd(color, cscale(object_color, light_intensity((t_light *)light->content, record)));
+	//	color *= vis;
+	//	color = cproduct(color, ((t_light *)light->content)->color);
+	//	light = light->next;
+	//}	
 	return (color);
-	//color = light_object(world->lights, record);
 }
 
 

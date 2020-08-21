@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 11:18:50 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/21 00:12:40 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/21 12:50:50 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_world		*new_world(unsigned int width, unsigned int height)
 	world->lights = new_light_set();
 	world->figures = new_figure_set();
 	world->cameras = new_camera_set(width, height);
-	world->ambient_light = 0x00FFFFFF;
+	world->ambience = new_light(point(0,0,0), 0.4, 0x00FFFFFF);
 	return (world);
 }
 
@@ -34,9 +34,9 @@ t_list	*new_light_set(void)
 
 	light_set = NULL;
 	ft_lstadd_back(&light_set, ft_lstnew(
-				new_light(point(2, 1, 2), 0.2, 0x0000FF00)));
-	ft_lstadd_back(&light_set, ft_lstnew(
-				new_light(point(-5, 5, -1), 0.5, 0x00FFFFFF)));
+				new_light(point(2, 1, 2), 0.2, 0x00FFFFFF)));
+	//ft_lstadd_back(&light_set, ft_lstnew(
+	//			new_light(point(-5, 5, -1), 1, 0x00FFFFFF)));
 	return (light_set);
 }
 

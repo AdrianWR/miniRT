@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 18:49:11 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/20 23:19:07 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/21 12:45:22 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,43 @@ t_light		*new_light(t_point position, float brightness, t_color color)
 	return (light);
 }
 
-float light_intensity(t_light *light, t_hit record)
+static float light_intensity(t_light light, t_hit record)
 {
 	t_vector	light_direction;
+	float		dotnormal;
 	float		r2;
 
-	light_direction = sub(light->position, record.p);
+	light_direction = sub(light.position, record.p);
 	r2 = length_squared(light_direction);
-	light_direction = norm(light_direction);
-
-	float dotnormal = dot(light_direction, record.normal);
-	if (dotnormal < 0)
+	dotnormal = dot(norm(light_direction), record.normal);
+	if (dotnormal <= 0)
 		return (0);
-	return ((light->brightness * dotnormal * 1000) / (4.0 * M_PI * r2));
+	return ((light.brightness * dotnormal * 1000) / (4.0 * M_PI * r2));
 }
 
-t_color light_object(t_list *light, t_hit record)
+static t_color	color_component(t_light ambience, t_light light, t_hit record)
 {
-	t_color color;
-	t_color object_color;
+	t_color		color;
+	t_color		object_color;
 
 	color = 0x0;
 	object_color = ((t_sphere *)record.object)->color;
+	color = cadd(color, cscale(object_color, light_intensity(light, record)));
+	color = cproduct(color, light.color);
+	color = cadd(color, cscale(ambience.color, ambience.brightness));
+	return (color);
+}
+
+t_color generate_light(t_light ambience, t_list *light, t_hit record)
+{
+	t_color color;
+	t_light current_light;
+
+	color = 0x0;
 	while (light)
 	{
-		color = cadd(color, cscale(object_color, light_intensity((t_light *)light->content, record)));
+		current_light = *((t_light *)light->content);
+		color += color_component(ambience, current_light, record);
 		light = light->next;
 	}	
 	return (color);

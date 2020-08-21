@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 00:33:58 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/19 18:35:05 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/21 11:09:31 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 # define WORLD_H
 
 # include "color.h"
+# include "light.h"
 # include "libft.h"
 
 typedef struct	s_world {
 	t_list		*figures;
 	t_list		*lights;
 	t_list		*cameras;
-	t_color		ambient_light;
+	t_light		*ambience;
 }				t_world;
 
 t_world		*new_world(unsigned int width, unsigned int height);
