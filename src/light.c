@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 18:49:11 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/21 12:45:22 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/24 02:21:39 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,33 @@ static float light_intensity(t_light light, t_hit record)
 	return ((light.brightness * dotnormal * 1000) / (4.0 * M_PI * r2));
 }
 
-static t_color	color_component(t_light ambience, t_light light, t_hit record)
+#include <stdio.h>
+
+static t_color	color_component(t_light light, t_hit record)
 {
+	t_color		obj_color;
 	t_color		color;
-	t_color		object_color;
 
 	color = 0x0;
-	object_color = ((t_sphere *)record.object)->color;
-	color = cadd(color, cscale(object_color, light_intensity(light, record)));
+	obj_color = ((t_sphere *)record.object)->color;
+	color = cadd(color, cscale(obj_color, light_intensity(light, record)));
 	color = cproduct(color, light.color);
-	color = cadd(color, cscale(ambience.color, ambience.brightness));
 	return (color);
 }
 
 t_color generate_light(t_light ambience, t_list *light, t_hit record)
 {
 	t_color color;
+	t_color obj_color;
 	t_light current_light;
 
-	color = 0x0;
+
+	obj_color = ((t_sphere *)record.object)->color;
+	color = cproduct(obj_color, cscale(ambience.color, ambience.brightness));
 	while (light)
 	{
 		current_light = *((t_light *)light->content);
-		color += color_component(ambience, current_light, record);
+		color = cadd(color, color_component(current_light, record));
 		light = light->next;
 	}	
 	return (color);
