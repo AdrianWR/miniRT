@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 11:18:50 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/25 09:06:27 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/25 15:36:37 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 #include "figures.h"
 #include "camera.h"
 #include "light.h"
+#include "server.h"
 
-t_world		*new_world(unsigned int width, unsigned int height)
+t_world		*new_world(t_window window)
 {
 	t_world	*world;
 	
@@ -23,7 +24,7 @@ t_world		*new_world(unsigned int width, unsigned int height)
 		return (NULL);
 	world->lights = new_light_set();
 	world->figures = new_figure_set();
-	world->cameras = new_camera_set(width, height);
+	world->cameras = new_camera_set(window);
 	world->ambient = new_light(point(0,0,0), 0.1, 0x00FFFFFF);
 	return (world);
 }
@@ -33,14 +34,10 @@ t_list	*new_light_set(void)
 	t_list *light_set;
 
 	light_set = NULL;
-	//ft_lstadd_back(&light_set, ft_lstnew(
-	//			new_light(point(-5, 5, -1), 0.4, 0x00FFFFFF)));
-	//ft_lstadd_back(&light_set, ft_lstnew(
-	//			new_light(point(2, 4, 0), 0.2, 0x00FFFFFF)));
-	//ft_lstadd_back(&light_set, ft_lstnew(
-	//			new_light(point(-5, 5, -1), 0.2, 0x0000FF00)));
 	ft_lstadd_back(&light_set, ft_lstnew(
 				new_light(point(0, 4, -2), 0.2, 0x00FFFFFF)));
+	ft_lstadd_back(&light_set, ft_lstnew(
+				new_light(point(0, 4, 2), 0.2, 0x0000FF00)));
 	return (light_set);
 }
 
@@ -60,22 +57,22 @@ t_list	*new_figure_set(void)
 	return (figure_set);
 }
 
-t_list	*new_camera_set(unsigned int width, unsigned int height)
+t_list	*new_camera_set(t_window window)
 {
 	t_list *camera_set;
 
 	camera_set = NULL;
 	ft_lstadd_back(&camera_set, ft_lstnew(
-		new_camera(point(0, 0, +3), vector(0, 0, -1), 60, width, height)));
+		new_cam(point(0, 0, 3), vector(0, 0, -1), 60, window)));
 	ft_lstadd_back(&camera_set, ft_lstnew(
-		new_camera(point(0, 0, 0), vector(0.5, 0, -1), 60, width, height)));
+		new_cam(point(0, 0, 0), vector(0.5, 0, -1), 60, window)));
 	ft_lstadd_back(&camera_set, ft_lstnew(
-		new_camera(point(0, 0, 0), vector(0, 0, -1), 60, width, height)));
+		new_cam(point(0, 0, 0), vector(0, 0, -1), 60, window)));
 	ft_lstadd_back(&camera_set, ft_lstnew(
-		new_camera(point(0, 0, 0), vector(-0.5, 0, -1), 60, width, height)));
+		new_cam(point(0, 0, 0), vector(-0.5, 0, -1), 60, window)));
 	ft_lstadd_back(&camera_set, ft_lstnew(
-		new_camera(point(0, 10, 10), vector(0, -0.5, -1), 60, width, height)));
+		new_cam(point(0, 10, 10), vector(0, -0.5, -1), 60, window)));
 	ft_lstadd_back(&camera_set, ft_lstnew(
-		new_camera(point(0, 10, 10), vector(-0.25, -0.5, -1), 60, width, height)));
+		new_cam(point(0, 10, 10), vector(-0.25, -0.5, -1), 60, window)));
 	return (camera_set);
 }

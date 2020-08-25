@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 14:02:59 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/19 18:30:20 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/25 11:18:35 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,34 +23,37 @@ static float	deg2rad(float deg)
 	return ((M_PI / 180) * deg);
 }
 
-t_camera		*new_camera(t_point origin, t_vector direction, float fov,
-							unsigned int width, unsigned int height)
+static void		set_camera(t_camera *camera, float vpx, float vpy)
 {
-	t_camera	*camera;
-
-	if (!(camera = malloc(sizeof(*camera))))
-		return NULL;
-	camera->origin = origin;
-	camera->direction = direction;
-	camera->fov = deg2rad(fov);
-
-	float	vpy;
-	float	vpx;
-
-	vpx = 2 * tan(camera->fov / 2);
-	vpy = (vpx * (float)height) / (float)width;
+	t_vector u;
+	t_vector v;
+	t_vector w;
 
 	camera->direction = scale(camera->direction, -1);
-	t_vector w = norm(camera->direction);
-	t_vector u = cross(vector(0, 1, 0), w);
-	t_vector v = cross(w, u);
-
+	w = norm(camera->direction);
+	u = cross(vector(0, 1, 0), w);
+	v = cross(w, u);
 	camera->horizontal = scale(u, vpx);
 	camera->vertical = scale(v, vpy);
 	camera->llc = sub(camera->origin, scale(camera->horizontal, 0.5));
 	camera->llc = sub(camera->llc, scale(camera->vertical, 0.5));
 	camera->llc = sub(camera->llc, w);
+}
 
+t_camera		*new_cam(t_point origin, t_vector dir, float fov, t_window win)
+{
+	t_camera	*camera;
+	float		vpy;
+	float		vpx;
+
+	if (!(camera = malloc(sizeof(*camera))))
+		return (NULL);
+	camera->origin = origin;
+	camera->direction = dir;
+	camera->fov = deg2rad(fov);
+	vpx = 2 * tan(camera->fov / 2);
+	vpy = vpx * (float)win.height / win.width;
+	set_camera(camera, vpx, vpy);
 	return (camera);
 }
 
@@ -84,6 +87,3 @@ void			change_camera(t_server *x, int step)
 			*cam = ((*cam)->previous);
 	render(x);
 }
-
-//t_list		*new_camera_set()
-

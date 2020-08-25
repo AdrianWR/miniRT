@@ -6,17 +6,17 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 18:49:11 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/24 22:26:48 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/25 11:25:11 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "server.h"
 #include "light.h"
 #include "vector.h"
 #include "color.h"
 #include "libft.h"
 #include "ray.h"
 #include "figures.h"
-#include "world.h"
 #include <math.h>
 #include <stdbool.h>
 
