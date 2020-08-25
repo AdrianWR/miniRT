@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 00:33:58 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/24 21:50:04 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/25 09:05:13 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct	s_world {
 	t_list		*figures;
 	t_list		*lights;
 	t_list		*cameras;
-	t_light		*ambience;
+	t_light		*ambient;
 }				t_world;
 
 t_world		*new_world(unsigned int width, unsigned int height);

@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:16:42 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/19 18:37:42 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/25 09:06:45 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,24 @@
 #include "libft.h"
 #include <stdlib.h>
 
+void			free_world(t_world *world)
+{
+	t_list *cam;
+
+	cam = ft_lstfirst(world->cameras);
+	ft_lstclear(&world->figures, free);
+	ft_lstclear(&world->lights, free);
+	ft_lstclear(&cam, free);
+	free(world->ambient);
+	free(world);
+}
+
 static int		exit_hook(t_server *x)
 {
-	//t_list *cam;
-
-	//cam = ft_lstfirst(x->camera_set);
 	mlx_destroy_image(x->mlx, x->image->image);
 	mlx_clear_window(x->mlx, x->window->window);
 	mlx_destroy_window(x->mlx, x->window->window);
-	//ft_lstclear(&x->world, free);
-	//ft_lstclear(&cam, free);
+	free_world(x->world);
 	free(x->window);
 	free(x->image);
 	free(x);

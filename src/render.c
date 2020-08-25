@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:44:08 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/25 08:53:25 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/25 09:06:09 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool 			raytrace(t_color *color, t_ray *ray, t_world *world)
 	t_light current_light;
 	
 	light = world->lights;
-	ambient = *world->ambience;
+	ambient = *world->ambient;
 	obj_color = ((t_sphere *)record.object)->color;
 	*color = cproduct(obj_color, cscale(ambient.color, ambient.brightness));
 	while (light)
@@ -52,7 +52,6 @@ bool 			raytrace(t_color *color, t_ray *ray, t_world *world)
 		current_light = *((t_light *)light->content);
 		vis = !in_shadow(current_light, world->figures, record);
 		*color = cadd(*color, vis * color_component(current_light, record));
-		//*color = cproduct(*color, cscale(ambient.color, ambient.brightness));
 		light = light->next;
 	}	
 	return (true);
