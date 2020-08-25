@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:44:08 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/21 11:10:11 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/24 23:08:44 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,55 +16,47 @@
 #include "camera.h"
 #include "figures.h"
 #include "light.h"
-#include <stdio.h>
-#include <unistd.h>
+#include <stdbool.h>
 #include <math.h>
 
-//static t_ray shadow_ray(t_light light, t_hit record)
-//{
-//	t_ray shadow;
-//
-//	shadow.origin = add(record.p, scale(record.normal, 0.0001));
-//	//shadow.origin = record.p;
-//	//shadow.direction = norm(sub(record.p, light.position));
-//	shadow.direction = norm(sub(light.position, record.p));
-//	return (shadow);
-//}
-
-t_color 			raytrace(t_ray *ray, t_world *world, int depth)
+static bool	in_shadow(t_light light, t_list *figures, t_hit record)
 {
-	t_hit		record;
-	t_color color;
-	//t_color object_color;
-	//t_ray shadow;
-	//t_list *light;
-	//t_color vis;
+	t_ray shadow;
+	t_hit rec;
 
-	//vis = 1;
-	if (depth <= 0)
-		return (0x0);
-	if (!intersect(ray, world->figures, &record))
-		return (0x0);
-	color = generate_light(*world->ambience, world->lights, record);
-	//light = world->lights;
-	//color = 0x0;
-	//object_color = ((t_sphere *)record.object)->color;
-	//while (light)
-	//{
-	//	shadow = shadow_ray(*((t_light *) light->content), record);
-	//	//vis = raytrace(&shadow, world, depth - 1);
-	//	//if (vis > 0)
-	//	//	vis = 0;
-	//	//else
-	//	//	vis = 1;
-	//	color = cadd(color, cscale(object_color, light_intensity((t_light *)light->content, record)));
-	//	color *= vis;
-	//	color = cproduct(color, ((t_light *)light->content)->color);
-	//	light = light->next;
-	//}	
-	return (color);
+	shadow.origin = add(record.p, scale(record.normal, 0.0001));
+	shadow.direction = norm(sub(light.position, record.p));
+	return (intersect(&shadow, figures, &rec));
 }
 
+bool 			raytrace(t_color *color, t_ray *ray, t_world *world)
+{
+	t_hit		record;
+	t_list		*light;
+	t_light		ambient;
+	bool		vis;
+
+	*color = 0x0;
+	if (!intersect(ray, world->figures, &record))
+		return (false);
+	//*color = generate_light(*world->ambience, world->lights, record);
+	t_color obj_color;
+	t_light current_light;
+	
+	light = world->lights;
+	ambient = *world->ambience;
+	obj_color = ((t_sphere *)record.object)->color;
+	*color = cproduct(obj_color, cscale(ambient.color, ambient.brightness));
+	while (light)
+	{
+		current_light = *((t_light *)light->content);
+		vis = !in_shadow(current_light, world->figures, record);
+		*color = cadd(*color, vis * color_component(current_light, record));
+		//*color = cproduct(*color, cscale(ambient.color, ambient.brightness));
+		light = light->next;
+	}	
+	return (true);
+}
 
 void				render(t_server *x)
 {
@@ -75,6 +67,7 @@ void				render(t_server *x)
 	t_ray			ray;
 	t_color			pixel_color;
 
+	pixel_color = 0x0;
 	j = x->window->height;
 	while (--j)
 	{
@@ -84,7 +77,7 @@ void				render(t_server *x)
 			u = (float) i / x->window->width;
 			v = (float) j / x->window->height;
 			ray = generate_ray(x->world->cameras->content, u, v);
-			pixel_color = raytrace(&ray, x->world, 2);
+			raytrace(&pixel_color, &ray, x->world);
 			put_pixel(x, i, x->window->height - 1 - j, pixel_color);
 		}
 	}

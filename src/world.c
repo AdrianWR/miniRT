@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 11:18:50 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/24 02:22:07 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/24 23:15:28 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ t_list	*new_light_set(void)
 
 	light_set = NULL;
 	ft_lstadd_back(&light_set, ft_lstnew(
-				new_light(point(2, 4, 0), 0.2, 0x00FFFFFF)));
+				new_light(point(-5, 5, -1), 0.4, 0x00FFFFFF)));
 	ft_lstadd_back(&light_set, ft_lstnew(
-				new_light(point(-5, 5, -1), 0.2, 0x0000FFFF)));
+				new_light(point(2, 4, 0), 0.2, 0x00FFFFFF)));
+	//ft_lstadd_back(&light_set, ft_lstnew(
+	//			new_light(point(-5, 5, -1), 0.2, 0x0000FF00)));
 	return (light_set);
 }
 
@@ -45,8 +47,10 @@ t_list	*new_figure_set(void)
 	t_list *figure_set;
 
 	figure_set = NULL;
+	//ft_lstadd_back(&figure_set, ft_lstnew(
+	//			new_sphere(point(-2, 0, -2), 0.5, 0x000000FF)));
 	ft_lstadd_back(&figure_set, ft_lstnew(
-				new_sphere(point(0, 0, -2), 0.5, 0x0000FF00)));
+				new_sphere(point(0, 0, -2), 0.5, 0x000000FF)));
 	ft_lstadd_back(&figure_set, ft_lstnew(
 				new_sphere(point(2, 0, -2), 0.5, 0x00FF0000)));
 	ft_lstadd_back(&figure_set, ft_lstnew(

@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 18:49:11 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/24 02:21:39 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/24 22:26:48 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 #include "libft.h"
 #include "ray.h"
 #include "figures.h"
+#include "world.h"
 #include <math.h>
+#include <stdbool.h>
 
 t_light		*new_light(t_point position, float brightness, t_color color)
 {
@@ -30,7 +32,7 @@ t_light		*new_light(t_point position, float brightness, t_color color)
 	return (light);
 }
 
-static float light_intensity(t_light light, t_hit record)
+float light_intensity(t_light light, t_hit record)
 {
 	t_vector	light_direction;
 	float		dotnormal;
@@ -44,9 +46,7 @@ static float light_intensity(t_light light, t_hit record)
 	return ((light.brightness * dotnormal * 1000) / (4.0 * M_PI * r2));
 }
 
-#include <stdio.h>
-
-static t_color	color_component(t_light light, t_hit record)
+t_color	color_component(t_light light, t_hit record)
 {
 	t_color		obj_color;
 	t_color		color;
@@ -58,18 +58,32 @@ static t_color	color_component(t_light light, t_hit record)
 	return (color);
 }
 
-t_color generate_light(t_light ambience, t_list *light, t_hit record)
+
+//static bool	detect_shadow(t_light light, t_hit record)
+//{
+//	t_ray shadow;
+//
+//	shadow.origin = add(record.p, scale(record.normal, 0.0001));
+//	shadow.direction = norm(sub(light.position, record.p));
+//	vis = !intersect(&shadow, world->figures, &new_rec);
+//}
+
+t_color		render_light(t_light ambient, t_list *light, t_hit record)
 {
 	t_color color;
 	t_color obj_color;
 	t_light current_light;
-
+	//bool	vis;
 
 	obj_color = ((t_sphere *)record.object)->color;
-	color = cproduct(obj_color, cscale(ambience.color, ambience.brightness));
+	color = cproduct(obj_color, cscale(ambient.color, ambient.brightness));
 	while (light)
 	{
 		current_light = *((t_light *)light->content);
+		//shadow = shadow_ray(current_light, record);
+		//vis = !intersect(&shadow, world->figures, &new_rec);
+		//vis = detect_shadow();
+		//color = vis * cadd(color, color_component(current_light, record));
 		color = cadd(color, color_component(current_light, record));
 		light = light->next;
 	}	

@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:48:45 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/21 10:36:13 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/24 23:15:15 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int cadd(int color_a, int color_b)
 	int r = clamp_rgb((color_a >> 0x10) + (color_b >> 0x10));
 	int g = clamp_rgb((color_a >> 0x08 & 0xFF) + (color_b >> 0x08 & 0xFF));
 	int b = clamp_rgb(color_a & 0xFF + color_b & 0xFF);
-	return (r << 0x10 | g << 0x08 | b);
+	return ((r << 0x10) | (g << 0x08) | b);
 }
 
 
@@ -43,8 +43,7 @@ t_color cproduct(t_color u, t_color v)
 	r = (((float)(u >> 0x10) / RGB_MAX) * ((float)(v >> 0x10) / RGB_MAX)) * RGB_MAX;
 	g = (((float)((u >> 0x08) & 0xFF) / RGB_MAX) * ((float)((v >> 0x08) & 0xFF)  / RGB_MAX)) * RGB_MAX;
 	b = (((float)(u & 0xFF) / RGB_MAX) * ((float)(v & 0xFF) / RGB_MAX)) * RGB_MAX;
-	return (r << 0x10 | g << 0x08 | b);
-
+	return ((r << 0x10) | (g << 0x08) | b);
 }
 
 t_color		cscale(int color, float c)
