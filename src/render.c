@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:44:08 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/25 09:06:09 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/26 17:03:45 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,45 @@
 #include "camera.h"
 #include "figures.h"
 #include "light.h"
-#include <stdbool.h>
 #include <math.h>
+#include <stdbool.h>
+
+#include <stdio.h>
 
 static bool	in_shadow(t_light light, t_list *figures, t_hit record)
 {
 	t_ray shadow;
-	t_hit rec;
 
+	//if (record.type == PLANE)
+	//	shadow.origin = add(record.p, scale(record.normal, 1));
+	//else
 	shadow.origin = add(record.p, scale(record.normal, 0.0001));
 	shadow.direction = norm(sub(light.position, record.p));
-	return (intersect(&shadow, figures, &rec));
+	//printf("plano y -> %f\n", record.p.y);
+	return (intersect(&shadow, figures));
 }
 
 bool 			raytrace(t_color *color, t_ray *ray, t_world *world)
 {
-	t_hit		record;
-	t_list		*light;
-	t_light		ambient;
 	bool		vis;
+	t_color		obj_color;
+	t_list		*light;
+	t_light		amb;
+	t_light 	current_light;
 
 	*color = 0x0;
-	if (!intersect(ray, world->figures, &record))
+	if (!intersect(ray, world->figures))
 		return (false);
-	//*color = generate_light(*world->ambience, world->lights, record);
-	t_color obj_color;
-	t_light current_light;
-	
 	light = world->lights;
-	ambient = *world->ambient;
-	obj_color = ((t_sphere *)record.object)->color;
-	*color = cproduct(obj_color, cscale(ambient.color, ambient.brightness));
+	amb = *world->ambient;
+	obj_color = ray->record.color;
+	*color = cproduct(obj_color, cscale(amb.color, amb.brightness));
 	while (light)
 	{
 		current_light = *((t_light *)light->content);
-		vis = !in_shadow(current_light, world->figures, record);
-		*color = cadd(*color, vis * color_component(current_light, record));
+		vis = !in_shadow(current_light, world->figures, ray->record);
+		//*color = cadd(*color, 1 * color_component(current_light, ray->record));
+		*color = cadd(*color, vis * color_component(current_light, ray->record));
 		light = light->next;
 	}	
 	return (true);

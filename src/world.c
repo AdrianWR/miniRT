@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 11:18:50 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/25 15:36:37 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/26 23:40:43 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_world		*new_world(t_window window)
 	world->lights = new_light_set();
 	world->figures = new_figure_set();
 	world->cameras = new_camera_set(window);
-	world->ambient = new_light(point(0,0,0), 0.1, 0x00FFFFFF);
+	world->ambient = new_light(point(0,0,0), 0.4, 0x00FFFFFF);
 	return (world);
 }
 
@@ -47,13 +47,13 @@ t_list	*new_figure_set(void)
 
 	figure_set = NULL;
 	ft_lstadd_back(&figure_set, ft_lstnew(
+				new_plane(point(0, -0.5, 0), vector(0, 1, 0), 0x00FFFF00)));
+	ft_lstadd_back(&figure_set, ft_lstnew(
 				new_sphere(point(-2, 0, -2), 0.5, 0x000000FF)));
 	ft_lstadd_back(&figure_set, ft_lstnew(
 				new_sphere(point(0, 0, -2), 0.5, 0x0000FF00)));
 	ft_lstadd_back(&figure_set, ft_lstnew(
 				new_sphere(point(2, 0, -2), 0.5, 0x00FF0000)));
-	ft_lstadd_back(&figure_set, ft_lstnew(
-				new_sphere(point(0, -100.5, -2), 100, 0x00FFFF00)));
 	return (figure_set);
 }
 

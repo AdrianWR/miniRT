@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:04:02 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/24 21:58:55 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/25 23:47:50 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "vector.h"
 #include "libft.h"
 #include "ray.h"
+#include "figures.h"
 
 typedef struct	s_light
 {
