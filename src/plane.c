@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:00 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/26 23:47:06 by aroque           ###   ########.fr       */
+/*   Updated: 2020/08/29 18:24:32 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,31 @@ bool		hit_plane(t_ray *ray, t_plane *plane)
 	float	t;
 	float	den;
 
+//	ray->record.normal = dot(ray->direction, plane->normal) > 0 ? scale(plane->normal, -1) : plane->normal;
 	den = dot(norm(ray->direction), plane->normal);
-	t = dot(sub(plane->point, ray->origin), plane->normal) / den;
-	if (ray->record.t > t && t > 0 && den <= 0)
+	if (den)
 	{
-		ray->record.t = t;
-		ray->record.p = at(*ray);
-		ray->record.normal = plane->normal;
-		ray->record.color = plane->color;
-		ray->record.type = PLANE;
-		return (true);
+		t = dot(sub(plane->point, ray->origin), plane->normal) / den;
+		if (ray->record.t > t && t > 0)
+		{
+			ray->record.t = t;
+			ray->record.p = at(*ray);
+			ray->record.normal = dot(ray->direction, plane->normal) > 0 ? scale(plane->normal, -1) : plane->normal;
+			ray->record.color = plane->color;
+			ray->record.type = plane->type;
+			ray->record.object = plane;
+			return (true);
+		}
 	}
+	//t = dot(sub(plane->point, ray->origin), plane->normal) / den;
+	//if (ray->record.t > t && t > 0 && den <= 0)
+	//{
+	//	ray->record.t = t;
+	//	ray->record.p = at(*ray);
+	//	ray->record.normal = plane->normal;
+	//	ray->record.color = plane->color;
+	//	ray->record.type = plane->type;
+	//	return (true);
+	//}
 	return (false);
 }
