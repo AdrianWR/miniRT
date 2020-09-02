@@ -6,18 +6,18 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 16:10:47 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/16 21:24:38 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/01 22:29:23 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
-t_vector	scale(t_vector u, float c)
+t_vector	scale(t_vector u, double c)
 {
 	return (vector((c * u.x), (c * u.y), (c * u.z)));
 }
 
-float		dot(t_vector u, t_vector v)
+double		dot(t_vector u, t_vector v)
 {
 	return ((u.x * v.x) + (u.y * v.y) + (u.z * v.z));
 }

@@ -6,7 +6,7 @@
 #    By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/23 10:13:02 by aroque            #+#    #+#              #
-#    Updated: 2020/08/27 16:02:50 by aroque           ###   ########.fr        #
+#    Updated: 2020/09/01 17:57:10 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,7 @@ SRC		= 	${SRC_DIR}/server.c			\
 			${SRC_DIR}/light.c			\
 			${SRC_DIR}/sphere.c			\
 			${SRC_DIR}/triangle.c		\
+			${SRC_DIR}/square.c			\
 			${SRC_DIR}/plane.c			\
 			${SRC_DIR}/world.c			\
 			${SRC_DIR}/listen.c			\

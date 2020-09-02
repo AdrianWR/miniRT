@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 17:16:37 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/27 16:00:04 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/01 17:52:59 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 # include "color.h"
 # include "figures.h"
 # include <stdbool.h>
-
-# define RAY_T_MIN		0.0001f
-# define RAY_T_MAX		1000.0f
 
 typedef struct	s_hit {
 	t_vector	normal;
@@ -43,4 +40,6 @@ bool			intersect(t_ray *ray, t_list *world);
 bool			hit_sphere(t_ray *ray, t_sphere *sphere);
 bool			hit_plane(t_ray *ray, t_plane *plane);
 bool			hit_triangle(t_ray *ray, t_triangle *triangle);
+bool			hit_square(t_ray *ray, t_square *square);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:44:08 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/01 17:13:14 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/01 22:59:41 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,15 @@
 #include "light.h"
 #include <math.h>
 #include <stdbool.h>
-#include <stdio.h>
 
 static bool	in_shadow(t_light light, t_list *figures, t_hit record)
 {
 	t_ray	shadow;
 
-	shadow.origin = add(record.p, scale(record.normal, 0.0001));
+	shadow.origin = add(record.p, scale(record.normal, 0.001));
 	shadow.direction = norm(sub(light.position, shadow.origin));
 	shadow.record.object = record.object;
-	if ((dot(record.normal, shadow.direction) > 0) && intersect(&shadow, figures))
+	if (intersect(&shadow, figures))
 		return (true);
 	return (false);
 }
@@ -53,7 +52,7 @@ t_color			raytrace(t_ray *ray, t_world *world)
 		vis = !in_shadow(current_light, world->figures, ray->record);
 		color = cadd(color, vis * color_component(current_light, ray->record));
 		light = light->next;
-	}	
+	}
 	return (color);
 }
 

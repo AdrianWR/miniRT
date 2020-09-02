@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 14:02:59 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/01 16:16:01 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/01 22:42:38 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_ray			generate_ray(t_camera *cam, float u, float v)
 	ray.origin = cam->origin;
 	ray.direction = add(scale(horizontal, u), scale(vertical, v));
 	ray.direction = add(ray.direction, llc);
-	ray.direction = sub(ray.direction, ray.origin);
+	ray.direction = norm(sub(ray.direction, ray.origin));
 	ray.record.object = NULL;
 	ray.record.color = 0x0;
 	return (ray);

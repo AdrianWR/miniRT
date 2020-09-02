@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 11:06:11 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/30 01:36:25 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/01 17:56:31 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ bool		intersect(t_ray *ray, t_list *world)
 				hit |= hit_plane(ray, (t_plane *)world->content);
 			if (type == TRIANGLE)
 				hit |= hit_triangle(ray, (t_triangle *)world->content);
+			if (type == SQUARE)
+				hit |= hit_square(ray, (t_square *)world->content);
 			//if (ray->record)
 
 		}
