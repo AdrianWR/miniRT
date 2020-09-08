@@ -6,7 +6,7 @@
 #    By: aroque <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 11:20:51 by aroque            #+#    #+#              #
-#    Updated: 2020/02/15 15:01:28 by aroque           ###   ########.fr        #
+#    Updated: 2020/09/05 18:51:23 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,9 @@ NAME = run
 CC =		gcc
 CC_FLAGS =	-Wall	\
 			-Wextra	\
-			-Werror
+			-Werror	\
+			-DLIBBSD_OVERLAY	\
+			-I/usr/include/bsd
 
 LD_FLAGS = 
 

@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:26:49 by aroque            #+#    #+#             */
-/*   Updated: 2020/02/15 15:00:07 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/05 18:52:14 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,40 +131,6 @@ static char *test_ft_memcmp(void)
 	mu_assert("ERROR: ft_memcmp("")", ft_memcmp(s1, "", 51) == memcmp(s1, "", 51));
 	mu_assert("ERROR: ft_memcmp("")", ft_memcmp(s1, "", 0) == memcmp(s1, "", 0));
 	mu_assert("ERROR: ft_memcmp("")", ft_memcmp("", "", 0) == memcmp("", "", 0));
-	return (0);
-}
-
-static char *test_ft_strlcpy(void)
-{
-	char *dst;
-	if (!(dst = malloc(15)))
-		return (0);
-	mu_assert("ERROR: ft_strlcpy(size = 0)", ft_strlcpy(dst, "teste", 0) == strlcpy(dst, "teste", 0));
-	mu_assert("ERROR: ft_strlcpy(size = 3)", ft_strlcpy(dst, "teste", 3) == strlcpy(dst, "teste", 3));
-	mu_assert("ERROR: ft_strlcpy(size = 10)", ft_strlcpy(dst, "teste", 10) == strlcpy(dst, "teste", 10));
-	mu_assert("ERROR: ft_strlcpy(src = A, size = 2)", ft_strlcpy(dst, "A", 2) == strlcpy(dst, "A", 2));
-	mu_assert("ERROR: ft_strlcpy not assigning to pointer", !strcmp(dst, "A"));
-	free(dst);
-	return (0);
-}
-
-static char *test_ft_strlcat(void)
-{
-	char *dst1;
-	char *dst2;
-	if (!(dst1 = malloc(255)))
-		return (0);
-	if (!(dst2 = malloc(255)))
-		return (0);
-	strlcpy(dst1, "Sao ", 5); strlcpy(dst2, "Sao ", 5);
-	mu_assert("ERROR: ft_strlcat(size = 0)", ft_strlcat(dst1, "Paulo", 0) == strlcat(dst2, "Paulo", 0));
-	mu_assert("ERROR: ft_strlcat(size = 0)", !strcmp(dst1, dst2));
-	ft_bzero(dst1, 255); ft_bzero(dst2, 255);
-	strlcpy(dst1, "Sao ", 5); strlcpy(dst2, "Sao ", 5);
-	mu_assert("ERROR: ft_strlcat(size = 127)", ft_strlcat(dst1, "Paulo", 127) == strlcat(dst2, "Paulo", 127));
-	mu_assert("ERROR: ft_strlcat(size = 0)", !strcmp(dst1, dst2));
-	free(dst1);
-	free(dst2);
 	return (0);
 }
 
@@ -418,6 +384,21 @@ static char	*test_ft_lstmap(void)
 	return (0);
 }
 
+
+static char *test_ft_atof(void)
+{
+	mu_assert("ERROR: ft_atof(0)", ft_atof("12.25") == atof("12.25"));
+	//mu_assert("ERROR: ft_atof(+1)", ft_atoi("+1") == 1);
+	//mu_assert("ERROR: ft_atof(-1)", ft_atoi("-1") == -1);
+	//mu_assert("ERROR: ft_atof(  42)", ft_atoi("\n\t 42") == 42);
+	//mu_assert("ERROR: ft_atof(INT_MAX)", ft_atoi("2147483647") == INT_MAX);
+	//mu_assert("ERROR: ft_atof(INT_MIN)", ft_atoi("-2147483648") == INT_MIN);
+	//mu_assert("ERROR: ft_atof(LONG_MAX)", ft_atoi("99999999999999999999") == atoi("99999999999999999999"));
+	//mu_assert("ERROR: ft_atof(LONG_MIN)", ft_atoi("-99999999999999999999") == atoi("-99999999999999999999"));
+	return (0);
+}
+
+
 static char *test_suite()
 {
 	mu_run_test(test_ft_memset);
@@ -427,8 +408,6 @@ static char *test_suite()
 	mu_run_test(test_ft_memmove);
 	mu_run_test(test_ft_memchr);
 	mu_run_test(test_ft_memcmp);
-	mu_run_test(test_ft_strlcpy);
-	mu_run_test(test_ft_strlcat);
 	mu_run_test(test_ft_strchr);
 	mu_run_test(test_ft_strrchr);
 	mu_run_test(test_ft_strncmp);

@@ -6,16 +6,26 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 11:50:06 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/25 11:51:01 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/08 09:21:39 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 #include <stdlib.h>
 
-static void	free_world(t_world *world)
+void			free_array(void **array)
 {
-	t_list *cam;
+	unsigned	i;
+
+	i = 0;
+	while (array[i])
+		free(array[i++]);
+	free(array);
+}
+
+void			free_world(t_world *world)
+{
+	t_list		*cam;
 
 	cam = ft_lstfirst(world->cameras);
 	ft_lstclear(&world->figures, free);
@@ -25,7 +35,7 @@ static void	free_world(t_world *world)
 	free(world);
 }
 
-void		free_server(t_server *x)
+void			free_server(t_server *x)
 {
 	mlx_destroy_image(x->mlx, x->image->image);
 	mlx_clear_window(x->mlx, x->window->window);

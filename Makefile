@@ -6,7 +6,7 @@
 #    By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/23 10:13:02 by aroque            #+#    #+#              #
-#    Updated: 2020/09/01 17:57:10 by aroque           ###   ########.fr        #
+#    Updated: 2020/09/08 09:06:45 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,9 +65,12 @@ SRC		= 	${SRC_DIR}/server.c			\
 			${SRC_DIR}/sphere.c			\
 			${SRC_DIR}/triangle.c		\
 			${SRC_DIR}/square.c			\
+			${SRC_DIR}/cylinder.c		\
 			${SRC_DIR}/plane.c			\
 			${SRC_DIR}/world.c			\
+			${SRC_DIR}/scene.c			\
 			${SRC_DIR}/listen.c			\
+			${SRC_DIR}/ascii.c			\
 			${SRC_DIR}/free.c
 
 
@@ -107,6 +110,6 @@ fclean: clean
 re: fclean all
 
 test: all
-	./$(NAME)
+	./$(NAME) ./examples/scene2.rt
 
 bonus: re

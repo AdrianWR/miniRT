@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:44:29 by aroque            #+#    #+#             */
-/*   Updated: 2020/05/12 23:27:38 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/08 09:29:55 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 #include "libft.h"
 #include "get_next_line.h"
 #include "scene.h"
-#include "hash.h"
+#include "camera.h"
+
+#include <stdio.h>
 
 /*
 **	open_scene_file(): Open the scene file as a file
@@ -44,52 +46,79 @@ static int		open_scene_file(const char *file)
 	return (fd);
 }
 
-void			free_array(char **array)
+static bool		identifier(char *s, char *id)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
+	if (!ft_strncmp(s, id, ft_strlen(s)))
+		return (true);
+	return (false);
 }
 
-static t_scene	*scene_parser(int fd)
+static void	resolution(unsigned res[2], unsigned x, unsigned y)
 {
+	res[0] = x;
+	res[1] = y;
+}
+
+static void	lladd(t_list **list, void *content)
+{
+	ft_lstadd_back(list, ft_lstnew(content));
+}
+
+static void		scene_parser(char **r, t_world *w, unsigned res[2])
+{
+	t_list **c;
+	t_list **l;
+	t_list **f;
+
+	c = &(w->cameras);
+	l = &(w->lights);
+	f = &(w->figures);
+	if (!r[0])
+		return ;
+	else if (identifier(r[0], "R"))
+		resolution(res, ft_atoi(r[1]), ft_atoi(r[2]));
+	else if (identifier(r[0], "A"))
+		w->ambient = new_light(point(0,0,0), ft_atof(r[1]), atoc(r[2]));
+	else if (identifier(r[0], "c"))
+		lladd(c, new_cam(atov(r[1]), atov(r[2]), ft_atof(r[3])));
+	else if (identifier(r[0], "l"))
+		lladd(l, new_light(atov(r[1]), ft_atof(r[2]), atoc(r[3])));
+	else if (identifier(r[0], "pl"))
+		lladd(f, new_plane(atov(r[1]), atov(r[2]), atoc(r[3])));
+	else if (identifier(r[0], "sp"))
+		lladd(f, new_sphere(atov(r[1]), ft_atof(r[2]), atoc(r[3])));
+	else if (identifier(r[0], "sq"))
+		lladd(f, new_square(atov(r[1]), atov(r[2]), ft_atof(r[3]), atoc(r[4])));
+	else if (identifier(r[0], "cy"))
+		lladd(f, new_cylinder(r));
+	else if (identifier(r[0], "tr"))
+		lladd(f, new_triangle(r));
+		//lladd(f, new_triangle(atov(r[1]), atov(r[2]), atov(r[3]), atoc(r[4])));
+}
+
+void	scene_initializer(const char *file, t_server **x)
+{
+	int			fd;
 	char		*line;
 	char 		**split;
-	t_scene		*scene;
-	t_hashtable	*ht;
+	t_world		*world;
+	unsigned	res[2];
 
 	line = NULL;
 	split = NULL;
-	if (!(scene = malloc(sizeof(*scene))))
-		return (NULL);
-	if (!(ht = ht_create(HT_SIZE)))
-		return (NULL);
+	if ((fd = open_scene_file(file)) < 0)
+		return ;
+	world = new_world();
 	while (get_next_line(fd, &line))
 	{
-		split = ft_split(line, ' ');
-		ht_set(ht, split[0], ft_strdup(split[1]));
-		free_array(split);
-		free(line);
+		if (*line || *line != '#')
+		{
+			split = ft_split(line, ' ');
+			scene_parser(split, world, res);
+			free_array((void **)split);
+		}
 	}
-	scene->elems = ht;
-	free(line);
-	return (scene);
-}
-
-t_scene			*scene_initializer(const char *file)
-{
-	t_scene	*map;
-	int		fd;
-
-	if ((fd = open_scene_file(file)) < 0)
-		return (NULL);
-	map = scene_parser(fd);
+	*x = new_server(res[0], res[1], world);
+	init_cameras(world->cameras, *(*x)->window);
 	close(fd);
-	return (map);
 }

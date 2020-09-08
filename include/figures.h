@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 22:38:41 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/01 17:52:46 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/08 09:31:41 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,32 @@ typedef struct	s_square {
 	t_point		center;
 	float		side;
 	t_vector	normal;
+	t_point		vertex[4];
 	t_color		color;
 }				t_square;
 
+typedef struct	s_cylinder {
+	t_type		type;
+	t_point		center;
+	t_vector	axis;
+	float		radius;
+	float		height;
+	t_point		edge[2];
+	t_color		color;
+}				t_cylinder;
+
 typedef struct	s_triangle {
 	t_type		type;
-	t_point		a;
-	t_point		b;
-	t_point		c;
+	t_point		vertex[3];
+	t_vector	normal;
 	t_color		color;
 }				t_triangle;
 
 
-t_sphere		*new_sphere(t_point center, float radius, t_color color);
-t_plane			*new_plane(t_point point, t_vector normal, t_color color);
-t_square		*new_square(t_point c, float side, t_vector n, t_color cl);
-t_triangle		*new_triangle(t_point a, t_point b, t_point c, t_color cl);
+t_sphere		*new_sphere(char **params);
+t_plane			*new_plane(char **params);
+t_square		*new_square(char **params);
+t_triangle		*new_triangle(char **params);
+t_cylinder		*new_cylinder(char **params);
 
 #endif

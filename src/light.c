@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 18:49:11 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/01 22:12:07 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/06 17:41:17 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ float light_intensity(t_light light, t_hit record)
 	if (dotnormal <= 0)
 		return (0);
 	return ((light.brightness * dotnormal * 1000) / (4.0 * M_PI * r2));
-	//return ((light.brightness * dotnormal * 10));
 }
 
 t_color	color_component(t_light light, t_hit record)

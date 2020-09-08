@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:44:08 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/01 22:59:41 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/03 16:05:17 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ static bool	in_shadow(t_light light, t_list *figures, t_hit record)
 {
 	t_ray	shadow;
 
-	shadow.origin = add(record.p, scale(record.normal, 0.001));
+	shadow.origin = add(record.p, scale(record.normal, EPSILON));
 	shadow.direction = norm(sub(light.position, shadow.origin));
 	shadow.record.object = record.object;
+	//if (dot(shadow.direction, record.normal) > 0 && intersect(&shadow, figures))
 	if (intersect(&shadow, figures))
 		return (true);
 	return (false);

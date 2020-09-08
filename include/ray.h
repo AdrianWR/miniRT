@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 17:16:37 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/01 17:52:59 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/03 21:40:51 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 # define RAY_H
 
 # include "libft.h"
-# include "vector.h"
 # include "color.h"
+# include "vector.h"
 # include "figures.h"
 # include <stdbool.h>
+
+# define EPSILON 0.0001
 
 typedef struct	s_hit {
 	t_vector	normal;
@@ -41,5 +43,6 @@ bool			hit_sphere(t_ray *ray, t_sphere *sphere);
 bool			hit_plane(t_ray *ray, t_plane *plane);
 bool			hit_triangle(t_ray *ray, t_triangle *triangle);
 bool			hit_square(t_ray *ray, t_square *square);
+bool			hit_cylinder(t_ray *ray, t_cylinder *cylinder);
 
 #endif

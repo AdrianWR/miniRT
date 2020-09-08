@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:20:31 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/25 11:52:27 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/08 09:22:37 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,13 @@ typedef struct		s_server
 }					t_server;
 
 
-t_world				*new_world		(t_window window);
-t_list				*new_light_set	(void);
-t_list				*new_figure_set	(void);
-t_list				*new_camera_set	(t_window window);
-t_server			*new_server		(unsigned int width, unsigned int height);
-unsigned int		mlx_listen		(t_server *x);
-void				color_map		(t_server *x, int color);
-void				put_pixel		(t_server *server, unsigned int x, unsigned int y, t_color color);
-void				free_server		(t_server *x);
+t_world				*new_world	(void);
+t_server			*new_server	(unsigned int width, unsigned int height, t_world *world);
+unsigned int		mlx_listen	(t_server *x);
+void				color_map	(t_server *x, int color);
+void				put_pixel	(t_server *server, unsigned int x, unsigned int y, t_color color);
+void				free_server	(t_server *x);
+void				free_world	(t_world *world);
+void				free_array	(void **array);
 
 #endif

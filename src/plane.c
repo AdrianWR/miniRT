@@ -6,16 +6,17 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:00 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/01 22:14:47 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/06 17:42:54 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
+#include "libft.h"
 #include "vector.h"
 #include "figures.h"
 #include <stdbool.h>
 
-t_plane		*new_plane(t_point point, t_vector normal, t_color color)
+t_plane	*new_plane(t_point point, t_vector normal, t_color color)
 {
 	t_plane	*plane;
 
@@ -34,19 +35,20 @@ bool		hit_plane(t_ray *ray, t_plane *plane)
 	double	den;
 
 	den = dot(norm(ray->direction), plane->normal);
-	if (den)
+	if (!den)
+		return (false);
+	t = dot(sub(plane->point, ray->origin), plane->normal) / den;
+	if (ray->record.t > t && t > EPSILON)
 	{
-		t = dot(sub(plane->point, ray->origin), plane->normal) / den;
-		if (ray->record.t > t && t > 0.001)
-		{
-			ray->record.t = t;
-			ray->record.p = at(*ray);
-			ray->record.normal = dot(ray->direction, plane->normal) > 0 ? scale(plane->normal, -1) : plane->normal;
-			ray->record.color = plane->color;
-			ray->record.type = plane->type;
-			ray->record.object = plane;
-			return (true);
-		}
+		if (dot(ray->direction, plane->normal) > 0)
+			plane->normal = scale(plane->normal, -1);
+		ray->record.t = t;
+		ray->record.p = at(*ray);
+		ray->record.normal = plane->normal;
+		ray->record.color = plane->color;
+		ray->record.type = plane->type;
+		ray->record.object = plane;
+		return (true);
 	}
 	return (false);
 }

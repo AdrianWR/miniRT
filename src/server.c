@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:39:42 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/19 22:02:55 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/06 16:59:15 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_image			*new_image(t_server *x)
 	return (img);
 }
 
-t_server		*new_server(unsigned int width, unsigned int height)
+t_server		*new_server(unsigned width, unsigned height, t_world *world)
 {
 	t_server	*x;
 	t_window	*win;
@@ -43,6 +43,7 @@ t_server		*new_server(unsigned int width, unsigned int height)
 	win->window = mlx_new_window(x->mlx, width, height, TITLE);
 	x->window = win;
 	x->image = new_image(x);
+	x->world = world;
 	return (x);
 }
 

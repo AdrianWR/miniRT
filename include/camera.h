@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 17:32:15 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/25 11:27:23 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/06 17:20:53 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ typedef struct	s_camera
 	float		fov;
 }				t_camera;
 
-t_camera		*new_cam	(t_point origin, t_vector dir, float fov, t_window win);
+t_camera		*new_cam	(t_point origin, t_vector dir, float fov);
+void			init_cameras(t_list *camset, t_window win);
 t_ray			generate_ray(t_camera *cam, float u, float v);
 void			change_camera(t_server *x, int step);
 void			render		(t_server *x);
