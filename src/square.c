@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 17:24:59 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/06 17:57:25 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/08 15:36:21 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "ray.h"
 #include "vector.h"
 #include "figures.h"
+#include "scene.h"
 #include <stdbool.h>
 #include <math.h>
 
@@ -30,18 +31,18 @@ static void			square_vertex(t_point center, t_vector normal, t_point *v)
 	v[3] = add(sub(center, basis_i), basis_j);
 }
 
-t_square			*new_square(t_point c, t_vector n, float side, t_color cl)
+t_square			*new_square(char **params)
 {
 	t_square	*square;
 
 	if (!(square = malloc(sizeof(*square))))
 		return (NULL);
 	square->type = SQUARE;
-	square->center = c;
-	square->side = side;
-	square->normal = n;
-	square->color = cl;
-	square_vertex(c, n, square->vertex);
+	square->center = atov(params[1]);
+	square->side = atof(params[2]);
+	square->normal = atov(params[3]);
+	square->color = atoc(params[4]);
+	square_vertex(square->center, square->normal, square->vertex);
 	return (square);
 }
 
@@ -72,19 +73,21 @@ bool				hit_square(t_ray *ray, t_square *square)
 {
 	bool			hit;
 	t_ray			r;
-	t_plane			*pl;
+	t_plane			pl;
 
 	hit = false;
-	pl = new_plane(square->center, square->normal, square->color);
+	//pl = new_plane(square->center, square->normal, square->color);
+	pl.point = square->center;
+	pl.normal = square->normal;
+	pl.color = square->color;
 	r.origin = ray->origin;
 	r.direction = ray->direction;
 	r.record.t = ray->record.t;
-	if (hit_plane(&r, pl) && is_inside(r.record, square->vertex, 4))
+	if (hit_plane(&r, &pl) && is_inside(r.record, square->vertex, 4))
 	{
 		*ray = r;
 		ray->record.object = square;
 		hit = true;
 	}
-	free(pl);
 	return (hit);
 }

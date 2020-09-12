@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:39:42 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/06 16:59:15 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/10 16:17:40 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_image			*new_image(t_server *x)
 	return (img);
 }
 
-t_server		*new_server(unsigned width, unsigned height, t_world *world)
+t_server		*new_server(int width, int height, t_world *world)
 {
 	t_server	*x;
 	t_window	*win;
@@ -38,9 +38,12 @@ t_server		*new_server(unsigned width, unsigned height, t_world *world)
 	if (!(win = malloc(sizeof(*win))))
 		return (NULL);
 	x->mlx = mlx_init();
-	win->width = width;
-	win->height = height;
-	win->window = mlx_new_window(x->mlx, width, height, TITLE);
+	mlx_get_screen_size(x->mlx, &(win->width), &(win->height));
+	if (width < win->width)
+		win->width = width;
+	if (height < win->height)
+		win->height = height;
+	win->window = mlx_new_window(x->mlx, win->width, win->height, TITLE);
 	x->window = win;
 	x->image = new_image(x);
 	x->world = world;

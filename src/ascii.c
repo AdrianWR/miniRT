@@ -6,27 +6,27 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 19:25:40 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/08 09:23:54 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/11 23:17:18 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "server.h"
 #include "libft.h"
 #include "color.h"
+#include <math.h>
 
 /*
 **	Check if a char is ASCII space, tabulation, carriage return
 **  or another space character as defined in isspace(3).
 */
 
-//static int	ft_isspace(char str)
-//{
-//	if (str == 0x20 || (str >= 0x09 && str <= 0x0d))
-//		return (1);
-//	return (0);
-//}
+static int	ft_isspace(char str)
+{
+	return (str == 0x20 || (str >= 0x09 && str <= 0x0d));
+}
 
 /*
-** Converts a string of characters to integer. An arbitrary amount
+** Converts a string of characters to float. An arbitrary amount
 ** of white spaces can be added at string start, followed by any
 ** amount of '+' or '-' signals. An even number of '-' cancels each
 ** other. The conversion is then made while the following chars are
@@ -34,44 +34,32 @@
 ** os identified, the function returns 0 (zero).
 */
 
-//int			ft_atof(const char *str)
-//{
-//	int n;
-//	int aux;
-//	int signal;
-//
-//	
-//	n = ft_atoi(str);
-//	aux = 0;
-//	signal = -1;
-//	while (*str >= '0' && *str <= '9')
-//	{
-//		n = n * 10 - (*str++ - '0');
-//		if (aux < n)
-//		{
-//			if (signal < 0)
-//				return (-1);
-//			return (0);
-//		}
-//		aux = n;
-//	}
-//	return (n * signal);
-//}
-
-static void 	free_array(void **array)
+float			ft_atof(const char *str)
 {
-	unsigned 	i;
+	float		n;
+	float		d;
+	int			i;
+	int			signal;
 
-	i = 0;
-	while (array[i])
-		free(array[i++]);
-	free(array);
-	////while (*array)
-	////	free();
-	//if (*array)
-	//	free_array(&(++*array));
-	//free(*array);
+	n = 0;
+	d = 0.0;
+	i = -1;
+	signal = 1;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '+' || *str == '-')
+		if (*str++ == '-')
+			signal = -1;
+	while (ft_isdigit(*str))
+		n = n * 10 + (*str++ - '0');
+	if (*str == '.' && *str++)
+	{
+		while (ft_isdigit(*str))
+			d += (pow(10, i--) * (*str++ - '0'));
+	}
+	return ((n + d) * signal);
 }
+
 
 t_vector atov(char *s)
 {
@@ -79,9 +67,9 @@ t_vector atov(char *s)
 	char		**split;
 
 	split = ft_split(s, ',');
-	v.x = atof(split[0]);
-	v.y = atof(split[1]);
-	v.z = atof(split[2]);
+	v.x = ft_atof(split[0]);
+	v.y = ft_atof(split[1]);
+	v.z = ft_atof(split[2]);
 	free_array((void **)split);
 	return (v);
 }
@@ -116,10 +104,6 @@ t_color atoc(char *s)
 		color = (color << 8) | prim;
 		i++;
 	}
+	free_array((void **)split);
 	return (color);
-}
-
-float ft_atof(char *s)
-{
-	return (atof(s));
 }

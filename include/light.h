@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:04:02 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/06 17:41:28 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/10 13:19:41 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct	s_light
 	t_color		color;
 }				t_light;
 
-t_light			*new_light(t_point position, float brightness, t_color color);
+t_light			*new_light(char **r, bool ambient);
 t_list			*new_light_set(void);
 float			light_intensity(t_light light, t_hit record);
 t_color			color_component(t_light light, t_hit record);

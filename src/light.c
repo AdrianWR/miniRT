@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 18:49:11 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/06 17:41:17 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/10 13:25:15 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,26 @@
 #include "libft.h"
 #include "ray.h"
 #include "figures.h"
+#include "scene.h"
 #include <math.h>
 #include <stdbool.h>
 
-t_light		*new_light(t_point position, float brightness, t_color color)
+t_light			*new_light(char **r, bool ambient)
 {
-	t_light	*light;
+	t_light		*light;
+	unsigned	i;
 
+	i = 1;
 	if (!(light = malloc(sizeof(*light))))
 		return (NULL);
-	light->position = position;
-	light->brightness = brightness;
-	light->color = color;
+	if (!ambient)
+		light->position = atov(r[i++]);
+	light->brightness = ft_atof(r[i++]);
+	light->color = atoc(r[i++]);
 	return (light);
 }
 
-float light_intensity(t_light light, t_hit record)
+float			light_intensity(t_light light, t_hit record)
 {
 	t_vector	light_direction;
 	float		dotnormal;
@@ -46,19 +50,17 @@ float light_intensity(t_light light, t_hit record)
 	return ((light.brightness * dotnormal * 1000) / (4.0 * M_PI * r2));
 }
 
-t_color	color_component(t_light light, t_hit record)
+t_color			color_component(t_light light, t_hit record)
 {
 	t_color		obj_color;
 	t_color		color;
 
 	color = 0x0;
-	//obj_color = ((t_sphere *)record.object)->color;
 	obj_color = record.color;
 	color = cadd(color, cscale(obj_color, light_intensity(light, record)));
 	color = cproduct(color, light.color);
 	return (color);
 }
-
 
 //static bool	detect_shadow(t_light light, t_hit record)
 //{
@@ -87,6 +89,6 @@ t_color	color_component(t_light light, t_hit record)
 //		//color = vis * cadd(color, color_component(current_light, record));
 //		color = cadd(color, color_component(current_light, record));
 //		light = light->next;
-//	}	
+//	}
 //	return (color);
 //}

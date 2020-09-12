@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:00 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/06 17:42:54 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/08 15:38:48 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 #include "libft.h"
 #include "vector.h"
 #include "figures.h"
+#include "scene.h"
 #include <stdbool.h>
 
-t_plane	*new_plane(t_point point, t_vector normal, t_color color)
+t_plane	*new_plane(char **params)
 {
 	t_plane	*plane;
 
 	if (!(plane = malloc(sizeof(*plane))))
 		return (NULL);
 	plane->type = PLANE;
-	plane->point = point;
-	plane->normal = norm(normal);
-	plane->color = color;
+	plane->point = atov(params[1]);
+	plane->normal = norm(atov(params[2]));
+	plane->color = atoc(params[3]);
 	return (plane);
 }
 

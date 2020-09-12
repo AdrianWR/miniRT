@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 14:02:59 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/07 09:43:23 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/08 18:00:39 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "libft.h"
 #include "server.h"
 #include "ray.h"
+#include "scene.h"
 #include <stdlib.h>
 #include <math.h>
 
@@ -50,15 +51,15 @@ void		init_cameras(t_list *camset, t_window win)
 	}
 }
 
-t_camera		*new_cam(t_point origin, t_vector dir, float fov)
+t_camera		*new_cam(char **params)
 {
 	t_camera	*camera;
 
 	if (!(camera = malloc(sizeof(*camera))))
 		return (NULL);
-	camera->origin = origin;
-	camera->direction = dir;
-	camera->fov = deg2rad(fov);
+	camera->origin = atov(params[1]);
+	camera->direction = atov(params[2]);
+	camera->fov = deg2rad(ft_atof(params[3]));
 	return (camera);
 }
 

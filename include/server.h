@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:20:31 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/08 09:22:37 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/10 13:58:06 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ typedef struct		s_image
 typedef struct		s_window
 {
 	void			*window;
-	unsigned int	width;
-	unsigned int	height;
+	int	width;
+	int	height;
 }					t_window;
 
 typedef struct		s_server
@@ -55,10 +55,10 @@ typedef struct		s_server
 
 
 t_world				*new_world	(void);
-t_server			*new_server	(unsigned int width, unsigned int height, t_world *world);
+t_server			*new_server	(int w, int h, t_world *world);
 unsigned int		mlx_listen	(t_server *x);
 void				color_map	(t_server *x, int color);
-void				put_pixel	(t_server *server, unsigned int x, unsigned int y, t_color color);
+void				put_pixel	(t_server *s, unsigned x, unsigned y, t_color c);
 void				free_server	(t_server *x);
 void				free_world	(t_world *world);
 void				free_array	(void **array);

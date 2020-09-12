@@ -1,16 +1,16 @@
 # RESOLUTION
 #    width   height
-R    1024    768
+R    800    600
 #### Ambient Lighting
 #    intensity               color
 A    0.5                     255,255,255
 
 ############### CAMERAS ##################
 #    origin    orientation   field-of-view
-c    0,8,6   0,-0.5,-1     90
+c    0,8,6     0,-0.5,-1     90
 c    0,10,10   0,-0.5,-1     90
 c    0,1,1     0,-0.5,-1.5   66
-c    0,1,10     0,-0.5,-1.5   66
+c    0,1,10    0,-0.5,-1.5   66
 
 ############### LIGHTING #####################
 #### origin ### intensity ######## color #####

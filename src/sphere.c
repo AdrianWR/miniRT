@@ -6,29 +6,30 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:42:24 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/26 00:30:39 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/08 15:41:49 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 #include "vector.h"
 #include "figures.h"
+#include "scene.h"
 #include <math.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
 #define SPHERE_ROOTS 2
 
-t_sphere			*new_sphere(t_point center, float radius, t_color color)
+t_sphere			*new_sphere(char **params)
 {
 	t_sphere		*sphere;
 
 	if (!(sphere = malloc(sizeof(*sphere))))
 		return (NULL);
 	sphere->type = SPHERE;
-	sphere->center = center;
-	sphere->radius = radius;
-	sphere->color = color;
+	sphere->center = atov(params[1]);
+	sphere->radius = atof(params[2]);
+	sphere->color = atoc(params[3]);
 	return (sphere);
 }
 
