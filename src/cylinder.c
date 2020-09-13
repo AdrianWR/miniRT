@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:44:32 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/08 09:06:12 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 00:33:04 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,21 @@
 t_cylinder		*new_cylinder(char **params)
 {
 	t_cylinder	*cylinder;
+	unsigned 	i;
 
+	i = 1;
+	while (params[i])
+		i++;
+	if (i != 6)
+		return (NULL);
 	if (!(cylinder = malloc(sizeof(*cylinder))))
 		return (NULL);
 	cylinder->type = CYLINDER;
-	cylinder->center = atov(params[1]);
-	cylinder->axis = norm(atov(params[2]));
-	cylinder->radius = atof(params[3]) / 2;
-	cylinder->height = atof(params[4]);
-	cylinder->color = atoc(params[5]);
+	cylinder->color = atoc(params[--i]);
+	cylinder->height = atof(params[--i]);
+	cylinder->radius = atof(params[--i]) / 2;
+	cylinder->axis = norm(atov(params[--i]));
+	cylinder->center = atov(params[--i]);
 	return (cylinder);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 11:24:25 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/16 17:43:33 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/11 23:23:01 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,14 @@ void				ft_lstclear(t_list **lst, void (*del)(void*));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+
+/*
+**	-----------------------
+**	--- Other Functions ---
+**	-----------------------
+*/
+
+int		ft_isspace(char str);
 
 /*
 **	░░░░░░░█▐▓▓░████▄▄▄█▀▄▓▓▓▌█

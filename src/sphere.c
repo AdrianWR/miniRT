@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:42:24 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/08 15:41:49 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 00:37:37 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,19 @@
 t_sphere			*new_sphere(char **params)
 {
 	t_sphere		*sphere;
+	unsigned		i;
 
+	i = 1;
+	while (params[i])
+		i++;
+	if (i != 4)
+		return (NULL);
 	if (!(sphere = malloc(sizeof(*sphere))))
 		return (NULL);
 	sphere->type = SPHERE;
-	sphere->center = atov(params[1]);
-	sphere->radius = atof(params[2]);
-	sphere->color = atoc(params[3]);
+	sphere->color = atoc(params[--i]);
+	sphere->radius = atof(params[--i]) / 2;
+	sphere->center = atov(params[--i]);
 	return (sphere);
 }
 

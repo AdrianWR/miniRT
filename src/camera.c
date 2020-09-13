@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 14:02:59 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/08 18:00:39 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 00:33:23 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void		init_cameras(t_list *camset, t_window win)
 		vp[1] = vp[0] * (float)win.height / win.width;
 		camera->direction = scale(camera->direction, -1);
 		w = norm(camera->direction);
-		//w = camera->direction;
 		u = cross(vector(0, 1, 0), w);
 		v = cross(w, u);
 		camera->horizontal = scale(u, vp[0]);
@@ -54,12 +53,18 @@ void		init_cameras(t_list *camset, t_window win)
 t_camera		*new_cam(char **params)
 {
 	t_camera	*camera;
+	unsigned	i;
 
+	i = 1;
+	while (params[i])
+		i++;
+	if (i-- != 4)
+		return (NULL);
 	if (!(camera = malloc(sizeof(*camera))))
 		return (NULL);
-	camera->origin = atov(params[1]);
-	camera->direction = atov(params[2]);
-	camera->fov = deg2rad(ft_atof(params[3]));
+	camera->fov = deg2rad(ft_atof(params[i--]));
+	camera->direction = atov(params[i--]);
+	camera->origin = atov(params[i--]);
 	return (camera);
 }
 

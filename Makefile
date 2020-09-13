@@ -6,7 +6,7 @@
 #    By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/23 10:13:02 by aroque            #+#    #+#              #
-#    Updated: 2020/09/10 22:00:11 by aroque           ###   ########.fr        #
+#    Updated: 2020/09/12 22:49:42 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,8 @@ SRC		= 	${SRC_DIR}/server.c			\
 			${SRC_DIR}/scene.c			\
 			${SRC_DIR}/listen.c			\
 			${SRC_DIR}/ascii.c			\
+			${SRC_DIR}/errcode.c		\
+			${SRC_DIR}/parser.c			\
 			${SRC_DIR}/free.c
 
 

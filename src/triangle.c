@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 23:56:26 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/08 09:33:23 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 00:32:17 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,21 @@ t_triangle			*new_triangle(char **params)
 {
 	t_triangle		*triangle;
 	t_vector		*v;
+	unsigned	i;
 
+	i = 1;
+	while (params[i])
+		i++;
+	if (i != 5)
+		return (NULL);
 	if (!(triangle = malloc(sizeof(*triangle))))
 		return (NULL);
 	v = triangle->vertex;
 	triangle->type = TRIANGLE;
-	triangle->vertex[0] = atov(params[1]);
-	triangle->vertex[1] = atov(params[2]);
-	triangle->vertex[2] = atov(params[3]);
-	triangle->color = atoc(params[4]);
+	triangle->color = atoc(params[--i]);
+	triangle->vertex[0] = atov(params[--i]);
+	triangle->vertex[1] = atov(params[--i]);
+	triangle->vertex[2] = atov(params[--i]);
 	triangle->normal = norm(cross(
 				sub(v[1], v[0]), sub(v[2], v[0])));
 	return (triangle);

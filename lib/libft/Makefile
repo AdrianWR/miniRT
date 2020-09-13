@@ -6,7 +6,7 @@
 #    By: aroque <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 11:20:51 by aroque            #+#    #+#              #
-#    Updated: 2020/09/05 18:55:47 by aroque           ###   ########.fr        #
+#    Updated: 2020/09/11 23:23:26 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ SRC		=	${SRC_DIR}/ft_memset.c		\
 			${SRC_DIR}/ft_lstclear.c	\
 			${SRC_DIR}/ft_lstiter.c		\
 			${SRC_DIR}/ft_lstmap.c		\
+			${SRC_DIR}/ft_isspace.c		\
 			${SRC_DIR}/get_next_line.c
 
 OBJ_DIR =	.

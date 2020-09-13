@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 19:25:40 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/11 23:17:18 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/11 23:23:47 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 #include "libft.h"
 #include "color.h"
 #include <math.h>
-
-/*
-**	Check if a char is ASCII space, tabulation, carriage return
-**  or another space character as defined in isspace(3).
-*/
-
-static int	ft_isspace(char str)
-{
-	return (str == 0x20 || (str >= 0x09 && str <= 0x0d));
-}
 
 /*
 ** Converts a string of characters to float. An arbitrary amount
@@ -60,10 +50,9 @@ float			ft_atof(const char *str)
 	return ((n + d) * signal);
 }
 
-
-t_vector atov(char *s)
+t_vector		atov(char *s)
 {
-	t_vector 	v;
+	t_vector	v;
 	char		**split;
 
 	split = ft_split(s, ',');
@@ -86,9 +75,9 @@ t_vector atov(char *s)
 **	Return: t_color data if no erros found, -1 otherwise;
 */
 
-t_color atoc(char *s)
+t_color			atoc(char *s)
 {
-	t_color 	color;
+	t_color		color;
 	char		**split;
 	int			prim;
 	unsigned	i;

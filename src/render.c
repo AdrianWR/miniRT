@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:44:08 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/03 16:05:17 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/12 00:43:48 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,34 +19,46 @@
 #include <math.h>
 #include <stdbool.h>
 
-static bool	in_shadow(t_light light, t_list *figures, t_hit record)
+bool			intersect(t_ray *ray, t_list *world)
 {
-	t_ray	shadow;
+	bool		hit;
+	void		*figure;
+	t_type		type;
 
-	shadow.origin = add(record.p, scale(record.normal, EPSILON));
-	shadow.direction = norm(sub(light.position, shadow.origin));
-	shadow.record.object = record.object;
-	//if (dot(shadow.direction, record.normal) > 0 && intersect(&shadow, figures))
-	if (intersect(&shadow, figures))
-		return (true);
-	return (false);
+	figure = NULL;
+	hit = false;
+	ray->record.t = INFINITY;
+	while (world)
+	{
+		type = *((t_type *)world->content);
+		if (type == SPHERE)
+			hit |= hit_sphere(ray, (t_sphere *)world->content);
+		else if (type == PLANE)
+			hit |= hit_plane(ray, (t_plane *)world->content);
+		else if (type == TRIANGLE)
+			hit |= hit_triangle(ray, (t_triangle *)world->content);
+		else if (type == SQUARE)
+			hit |= hit_square(ray, (t_square *)world->content);
+		else if (type == CYLINDER)
+			hit |= hit_cylinder(ray, (t_cylinder *)world->content);
+		world = world->next;
+	}
+	return (hit);
 }
 
 t_color			raytrace(t_ray *ray, t_world *world)
 {
 	bool		vis;
-	t_color		obj_color;
 	t_color		color;
-	t_light		amb;
+	t_color		ambient;
 	t_list		*light;
-	t_light 	current_light;
+	t_light		current_light;
 
 	if (!intersect(ray, world->figures))
 		return (0x0);
-	amb = *world->ambient;
 	light = world->lights;
-	obj_color = ray->record.color;
-	color = cproduct(obj_color, cscale(amb.color, amb.brightness));
+	ambient = cscale((*world->ambient).color, (*world->ambient).brightness);
+	color = cproduct(ray->record.color, ambient);
 	while (light)
 	{
 		current_light = *((t_light *)light->content);
@@ -57,14 +69,12 @@ t_color			raytrace(t_ray *ray, t_world *world)
 	return (color);
 }
 
-void				render(t_server *x)
+void			render(t_server *x)
 {
-	unsigned int	i;
-	unsigned int	j;
-	float			u;
-	float			v;
-	t_ray			ray;
-	t_color			pixel_color;
+	unsigned	i;
+	unsigned	j;
+	t_ray		ray;
+	t_color		pixel_color;
 
 	j = x->window->height;
 	while (--j)
@@ -72,9 +82,8 @@ void				render(t_server *x)
 		i = x->window->width;
 		while (--i)
 		{
-			u = (float) i / x->window->width;
-			v = (float) j / x->window->height;
-			ray = generate_ray(x->world->cameras->content, u, v);
+			ray = generate_ray(x->world->cameras->content,
+					(float)i / x->window->width, (float)j / x->window->height);
 			pixel_color = raytrace(&ray, x->world);
 			put_pixel(x, i, x->window->height - 1 - j, pixel_color);
 		}

@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 17:24:59 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/08 15:36:21 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 00:32:42 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,39 @@
 #include <stdbool.h>
 #include <math.h>
 
-static void			square_vertex(t_point center, t_vector normal, t_point *v)
+static void			square_vertex(t_square *s)
 {
 	t_point		basis_i;
 	t_point		basis_j;
 
-	basis_i = norm(cross(normal, vector(normal.z, normal.x, normal.y)));
-	basis_j = norm(cross(normal, basis_i));
-	v[0] = add(add(center, basis_i), basis_j);
-	v[1] = sub(add(center, basis_i), basis_j);
-	v[2] = sub(sub(center, basis_i), basis_j);
-	v[3] = add(sub(center, basis_i), basis_j);
+	basis_i = cross(s->normal, vector(s->normal.z, s->normal.x, s->normal.y));
+	basis_j = cross(s->normal, basis_i);
+	basis_i = scale(basis_i, s->side / 2);
+	basis_j = scale(basis_j, s->side / 2);
+	s->vertex[0] = add(add(s->center, basis_i), basis_j);
+	s->vertex[1] = sub(add(s->center, basis_i), basis_j);
+	s->vertex[2] = sub(sub(s->center, basis_i), basis_j);
+	s->vertex[3] = add(sub(s->center, basis_i), basis_j);
 }
 
 t_square			*new_square(char **params)
 {
 	t_square	*square;
+	unsigned	i;
 
+	i = 1;
+	while (params[i])
+		i++;
+	if (i != 5)
+		return (NULL);
 	if (!(square = malloc(sizeof(*square))))
 		return (NULL);
 	square->type = SQUARE;
-	square->center = atov(params[1]);
-	square->side = atof(params[2]);
-	square->normal = atov(params[3]);
-	square->color = atoc(params[4]);
-	square_vertex(square->center, square->normal, square->vertex);
+	square->color = atoc(params[--i]);
+	square->normal = atov(params[--i]);
+	square->side = atof(params[--i]);
+	square->center = atov(params[--i]);
+	square_vertex(square);
 	return (square);
 }
 
