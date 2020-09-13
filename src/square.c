@@ -6,15 +6,15 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 17:24:59 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 00:32:42 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 20:05:20 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "ray.h"
 #include "vector.h"
 #include "figures.h"
 #include "scene.h"
+#include "errcode.h"
 #include <stdbool.h>
 #include <math.h>
 
@@ -33,23 +33,19 @@ static void			square_vertex(t_square *s)
 	s->vertex[3] = add(sub(s->center, basis_i), basis_j);
 }
 
-t_square			*new_square(char **params)
+t_square			*new_square(char **params, int *errcode)
 {
 	t_square	*square;
-	unsigned	i;
 
-	i = 1;
-	while (params[i])
-		i++;
-	if (i != 5)
+	if (strarray_len(params) != 5 && (*errcode = EBADFMT))
 		return (NULL);
 	if (!(square = malloc(sizeof(*square))))
 		return (NULL);
 	square->type = SQUARE;
-	square->color = atoc(params[--i]);
-	square->normal = atov(params[--i]);
-	square->side = atof(params[--i]);
-	square->center = atov(params[--i]);
+	square->color = ft_atoc(params[4], errcode);
+	square->normal = ft_atov(params[3], errcode);
+	square->side = ft_atof(params[2]);
+	square->center = ft_atov(params[1], errcode);
 	square_vertex(square);
 	return (square);
 }
@@ -84,7 +80,6 @@ bool				hit_square(t_ray *ray, t_square *square)
 	t_plane			pl;
 
 	hit = false;
-	//pl = new_plane(square->center, square->normal, square->color);
 	pl.point = square->center;
 	pl.normal = square->normal;
 	pl.color = square->color;

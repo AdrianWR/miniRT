@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:42:24 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 00:37:37 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 20:05:20 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,23 @@
 #include "vector.h"
 #include "figures.h"
 #include "scene.h"
+#include "errcode.h"
 #include <math.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define SPHERE_ROOTS 2
-
-t_sphere			*new_sphere(char **params)
+t_sphere			*new_sphere(char **params, int *errcode)
 {
 	t_sphere		*sphere;
-	unsigned		i;
 
-	i = 1;
-	while (params[i])
-		i++;
-	if (i != 4)
+	if (strarray_len(params) != 4 && (*errcode = EBADFMT))
 		return (NULL);
 	if (!(sphere = malloc(sizeof(*sphere))))
 		return (NULL);
 	sphere->type = SPHERE;
-	sphere->color = atoc(params[--i]);
-	sphere->radius = atof(params[--i]) / 2;
-	sphere->center = atov(params[--i]);
+	sphere->color = ft_atoc(params[3], errcode);
+	sphere->radius = atof(params[2]) / 2;
+	sphere->center = ft_atov(params[1], errcode);
 	return (sphere);
 }
 
@@ -59,11 +54,11 @@ static void			roots(t_ray ray, t_sphere sphere, float *root)
 bool				hit_sphere(t_ray *ray, t_sphere *sphere)
 {
 	unsigned int	i;
-	float			root[SPHERE_ROOTS];
+	float			root[2];
 
 	i = 0;
 	roots(*ray, *sphere, root);
-	while (i < SPHERE_ROOTS)
+	while (i < 2)
 	{
 		if (ray->record.t > root[i] && root[i] > 0)
 		{

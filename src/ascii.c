@@ -6,14 +6,25 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 19:25:40 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/11 23:23:47 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 20:05:20 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 #include "libft.h"
 #include "color.h"
+#include "errcode.h"
 #include <math.h>
+
+unsigned		strarray_len(char **params)
+{
+	unsigned	i;
+
+	i = 0;
+	while (params[i])
+		i++;
+	return (i);
+}
 
 /*
 ** Converts a string of characters to float. An arbitrary amount
@@ -50,21 +61,26 @@ float			ft_atof(const char *str)
 	return ((n + d) * signal);
 }
 
-t_vector		atov(char *s)
+t_vector		ft_atov(char *s, int *errcode)
 {
 	t_vector	v;
 	char		**split;
 
 	split = ft_split(s, ',');
-	v.x = ft_atof(split[0]);
-	v.y = ft_atof(split[1]);
-	v.z = ft_atof(split[2]);
+	if (strarray_len(split) != 3 && (*errcode = EBADVEC))
+		v = vector(0, 0, 0);
+	else
+	{
+		v.x = ft_atof(split[0]);
+		v.y = ft_atof(split[1]);
+		v.z = ft_atof(split[2]);
+	}
 	free_array((void **)split);
 	return (v);
 }
 
 /*
-**	atoc(char *s): Get a string in the format "<r>,<g>,<b>"
+**	ft_atoc(char *s): Get a string in the format "<r>,<g>,<b>"
 **  and convert its information to a t_color data type.
 **  Each one of these letters <r>, <g> and <b> represent
 **  a value of the primitives red, green and blue, in the
@@ -75,7 +91,7 @@ t_vector		atov(char *s)
 **	Return: t_color data if no erros found, -1 otherwise;
 */
 
-t_color			atoc(char *s)
+t_color			ft_atoc(char *s, int *errcode)
 {
 	t_color		color;
 	char		**split;
@@ -85,13 +101,18 @@ t_color			atoc(char *s)
 	i = 0;
 	color = 0x0;
 	split = ft_split(s, ',');
-	while (i < 3)
+	if (strarray_len(split) != 3)
+		*errcode = EBADCLR;
+	else
 	{
-		prim = ft_atoi(split[i]);
-		if (prim < 0 || prim > 255)
-			return (-1);
-		color = (color << 8) | prim;
-		i++;
+		while (i < 3)
+		{
+			prim = ft_atoi(split[i]);
+			if (prim < 0 || prim > 0xFF)
+				*errcode = EOURCLR;
+			color = (color << 8) | prim;
+			i++;
+		}
 	}
 	free_array((void **)split);
 	return (color);

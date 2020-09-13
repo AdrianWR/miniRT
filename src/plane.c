@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:00 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 00:32:54 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 20:16:16 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,21 @@
 #include "vector.h"
 #include "figures.h"
 #include "scene.h"
+#include "errcode.h"
 #include <stdbool.h>
 
-t_plane	*new_plane(char **params)
+t_plane		*new_plane(char **params, int *errcode)
 {
 	t_plane	*plane;
-	unsigned i;
 
-	i = 1;
-	while (params[i])
-		i++;
-	if (i != 4)
+	if (strarray_len(params) != 4 && (*errcode = EBADFMT))
 		return (NULL);
 	if (!(plane = malloc(sizeof(*plane))))
 		return (NULL);
 	plane->type = PLANE;
-	plane->color = atoc(params[--i]);
-	plane->normal = norm(atov(params[--i]));
-	plane->point = atov(params[--i]);
+	plane->color = ft_atoc(params[3], errcode);
+	plane->normal = norm(ft_atov(params[2], errcode));
+	plane->point = ft_atov(params[1], errcode);
 	return (plane);
 }
 

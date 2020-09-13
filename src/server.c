@@ -6,13 +6,14 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:39:42 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/10 16:17:40 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 20:18:35 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "server.h"
 #include "mlx.h"
+#include "server.h"
+#include "camera.h"
+#include <stdlib.h>
 
 t_image			*new_image(t_server *x)
 {
@@ -28,7 +29,7 @@ t_image			*new_image(t_server *x)
 	return (img);
 }
 
-t_server		*new_server(int width, int height, t_world *world)
+t_server		*new_server(t_world *world)
 {
 	t_server	*x;
 	t_window	*win;
@@ -39,23 +40,24 @@ t_server		*new_server(int width, int height, t_world *world)
 		return (NULL);
 	x->mlx = mlx_init();
 	mlx_get_screen_size(x->mlx, &(win->width), &(win->height));
-	if (width < win->width)
-		win->width = width;
-	if (height < win->height)
-		win->height = height;
+	if (world->resolution[0] < win->width)
+		win->width = world->resolution[0];
+	if (world->resolution[1] < win->height)
+		win->height = world->resolution[1];
 	win->window = mlx_new_window(x->mlx, win->width, win->height, TITLE);
 	x->window = win;
 	x->image = new_image(x);
 	x->world = world;
+	init_cameras(world->cameras, *x->window);
 	return (x);
 }
 
-void	put_pixel(t_server *s, unsigned int x, unsigned int y, t_color color)
+void			put_pixel(t_server *s, unsigned x, unsigned y, t_color color)
 {
-	char			*color_addr;
-	unsigned int 	hex_color;
-	unsigned int 	opp;
-	
+	char		*color_addr;
+	unsigned	hex_color;
+	unsigned	opp;
+
 	opp = s->image->bpp / 8;
 	color_addr = (s->image->data + y * s->image->size_line + x * opp);
 	hex_color = mlx_get_color_value(s->mlx, color);

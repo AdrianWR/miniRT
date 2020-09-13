@@ -6,36 +6,33 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:44:32 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 00:33:04 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 20:05:20 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 #include "vector.h"
 #include "figures.h"
+#include "errcode.h"
 #include <math.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include "scene.h"
 
-t_cylinder		*new_cylinder(char **params)
+t_cylinder		*new_cylinder(char **params, int *errcode)
 {
 	t_cylinder	*cylinder;
-	unsigned 	i;
 
-	i = 1;
-	while (params[i])
-		i++;
-	if (i != 6)
+	if (strarray_len(params) != 6 && (*errcode = EBADFMT))
 		return (NULL);
 	if (!(cylinder = malloc(sizeof(*cylinder))))
 		return (NULL);
 	cylinder->type = CYLINDER;
-	cylinder->color = atoc(params[--i]);
-	cylinder->height = atof(params[--i]);
-	cylinder->radius = atof(params[--i]) / 2;
-	cylinder->axis = norm(atov(params[--i]));
-	cylinder->center = atov(params[--i]);
+	cylinder->color = ft_atoc(params[5], errcode);
+	cylinder->height = ft_atof(params[4]);
+	cylinder->radius = ft_atof(params[3]) / 2;
+	cylinder->axis = norm(ft_atov(params[2], errcode));
+	cylinder->center = ft_atov(params[1], errcode);
 	return (cylinder);
 }
 
@@ -58,9 +55,9 @@ static void		roots(t_ray r, t_cylinder cy, float root[2])
 	root[1] = (-half_b + sqrt(pow(half_b, 2) - a * c)) / a;
 }
 
-static bool		solve(t_ray r, t_cylinder cy, float *y, float *t)
+static float	solve(t_ray r, t_cylinder cy, float *y, bool hit[2])
 {
-	bool		hit[2];
+	float		t;
 	float		dist[2];
 	float		root[2];
 	t_vector	b_ray;
@@ -74,31 +71,32 @@ static bool		solve(t_ray r, t_cylinder cy, float *y, float *t)
 	if (hit[0] && hit[1])
 	{
 		*y = root[0] < root[1] ? dist[0] : dist[1];
-		*t = root[0] < root[1] ? root[0] : root[1];
+		t = root[0] < root[1] ? root[0] : root[1];
 	}
 	else
 	{
 		*y = hit[0] ? dist[0] : dist[1];
-		*t = hit[0] ? root[0] : root[1];
+		t = hit[0] ? root[0] : root[1];
 	}
-	return (hit[0] || hit[1]);
+	return (t);
 }
 
 bool			hit_cylinder(t_ray *ray, t_cylinder *cylinder)
 {
-	bool		hit;
 	float		y;
 	float		t;
+	bool		hit[2];
 
-	hit = false;
-	if (solve(*ray, *cylinder, &y, &t) && ray->record.t > t && t > EPSILON)
+	t = solve(*ray, *cylinder, &y, hit);
+	if ((hit[0] || hit[1]) && ray->record.t > t && t > EPSILON)
 	{
 		ray->record.t = t;
 		ray->record.p = at(*ray);
 		ray->record.normal = norm(sub(ray->record.p,
 					add(scale(cylinder->axis, y), cylinder->center)));
+		if (hit[1] & !hit[0])
+			ray->record.normal = scale(ray->record.normal, -1);
 		ray->record.color = cylinder->color;
-		hit = true;
 	}
-	return (hit);
+	return (hit[0] || hit[1]);
 }

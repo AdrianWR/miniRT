@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 20:18:37 by aroque            #+#    #+#             */
-/*   Updated: 2020/01/25 22:13:08 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 15:27:31 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
+	if (!(*lst))
+		return ;
 	if ((*lst)->next)
 		ft_lstclear(&(*lst)->next, del);
 	ft_lstdelone(*lst, del);

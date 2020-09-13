@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 23:56:26 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 00:32:17 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 20:05:20 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,21 @@
 #include <stdbool.h>
 #include <math.h>
 
-t_triangle			*new_triangle(char **params)
+t_triangle			*new_triangle(char **params, int *errcode)
 {
 	t_triangle		*triangle;
 	t_vector		*v;
-	unsigned	i;
 
-	i = 1;
-	while (params[i])
-		i++;
-	if (i != 5)
+	if (strarray_len(params) != 5 && (*errcode = EBADFMT))
 		return (NULL);
 	if (!(triangle = malloc(sizeof(*triangle))))
 		return (NULL);
 	v = triangle->vertex;
 	triangle->type = TRIANGLE;
-	triangle->color = atoc(params[--i]);
-	triangle->vertex[0] = atov(params[--i]);
-	triangle->vertex[1] = atov(params[--i]);
-	triangle->vertex[2] = atov(params[--i]);
+	triangle->color = ft_atoc(params[4], errcode);
+	triangle->vertex[0] = ft_atov(params[3], errcode);
+	triangle->vertex[1] = ft_atov(params[2], errcode);
+	triangle->vertex[2] = ft_atov(params[1], errcode);
 	triangle->normal = norm(cross(
 				sub(v[1], v[0]), sub(v[2], v[0])));
 	return (triangle);

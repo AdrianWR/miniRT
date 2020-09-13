@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 14:02:59 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 00:33:23 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 20:11:02 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-static float	deg2rad(float deg)
-{
-	return ((M_PI / 180) * deg);
-}
-
-void		init_cameras(t_list *camset, t_window win)
+void			init_cameras(t_list *camset, t_window win)
 {
 	float		vp[2];
 	t_vector	u;
@@ -48,24 +43,6 @@ void		init_cameras(t_list *camset, t_window win)
 		camera->llc = sub(camera->llc, w);
 		camset = camset->next;
 	}
-}
-
-t_camera		*new_cam(char **params)
-{
-	t_camera	*camera;
-	unsigned	i;
-
-	i = 1;
-	while (params[i])
-		i++;
-	if (i-- != 4)
-		return (NULL);
-	if (!(camera = malloc(sizeof(*camera))))
-		return (NULL);
-	camera->fov = deg2rad(ft_atof(params[i--]));
-	camera->direction = atov(params[i--]);
-	camera->origin = atov(params[i--]);
-	return (camera);
 }
 
 t_ray			generate_ray(t_camera *cam, float u, float v)

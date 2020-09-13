@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 18:49:11 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/12 23:23:25 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 20:11:56 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,20 @@
 #include "color.h"
 #include "libft.h"
 #include "ray.h"
-#include "scene.h"
 #include <math.h>
-
-t_light			*new_light(char **r, bool ambient)
-{
-	t_light		*light;
-	unsigned	i;
-
-	i = 1;
-	if (!(light = malloc(sizeof(*light))))
-		return (NULL);
-	while (r[i])
-		i++;
-	if ((ambient && i != 3) || (!ambient && i != 4))
-		return (NULL);
-	light->color = atoc(r[--i]);
-	light->brightness = ft_atof(r[--i]);
-	if (!ambient)
-		light->position = atov(r[--i]);
-	return (light);
-}
 
 static float	light_intensity(t_light light, t_hit record)
 {
 	t_vector	light_direction;
-	float		dotnormal;
+	float		gain;
 	float		r2;
 
 	light_direction = sub(light.position, record.p);
 	r2 = length_squared(light_direction);
-	dotnormal = dot(norm(light_direction), record.normal);
-	if (dotnormal <= 0)
+	gain = dot(norm(light_direction), record.normal);
+	if (gain <= 0)
 		return (0);
-	return ((light.brightness * dotnormal * 1000) / (4.0 * M_PI * r2));
+	return ((light.brightness * gain * ALBEDO) / (4.0 * M_PI * r2));
 }
 
 t_color			color_component(t_light light, t_hit record)

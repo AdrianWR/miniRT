@@ -1,37 +1,37 @@
-########  RESOLUTION #######
-#### width ## height #######
-R    800      600
+#######  RESOLUTION ########
+###### width ## height #####
+R      800      600
 
-#### AMBIENT LIGHTING ####
-#    intensity               color
-A    0.5                     255,255,255
+####### AMBIENT LIGHTING #######
+#### intensity ##### color #####
+A    0.5             255,255,255
 
 ############### CAMERAS ##################
 #    origin    orientation   field-of-view
-c    0,8,6     0,-0.5,-1	 90
+c    0,8,6     0,-0.5,-1     90
 c    0,10,10   0,-0.5,-1     90
 c    0,1,1     0,-0.5,-1.5   66
 c    0,1,10    0,-0.5,-1.5   66
 
 ############### LIGHTING #####################
 #### origin ### intensity ######## color #####
-l    0,4,3      0.2                255,255,255
+l    0,4,3      0.4                255,255,255
 
 ################### PLANE ####################
 ##### origin ### normal ########## color #####
-pl    0,-1,0     0,1,0             255,255,0
+pl    0,-1,0     0,1,0            255,255,0
 
 ################### SPHERE ####################
-##### center ###### diameter ###### color #####
+##### origin ###### diameter ###### color #####
 sp    0,0,-2        1.0             0,255,0
 
 ################# SQUARE ######################
-#    center     side_size normal   color
-sq   0,0,-6   0,0,1   127,127,255
+#    center		side_size 	normal	color
+sq   0,0,-6     5.0         0,0,1   127,127,255
 
-################# TRIANGLE ######################
+################# TRIANGLE ########################
 #    vertex      vertex      vertex       color
-tr   -2,-0.5,0  2,-0.5,0  0,-0.5,-5   0,255,255
+tr   -2,-0.5,0   2,-0.5,0     0,-0.5,-5   0,255,255
 
 ################# CYLINDER ###############################
 #    center    orientation  diameter  height   color

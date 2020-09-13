@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 22:38:41 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/08 09:31:41 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 20:22:34 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,10 @@ typedef struct	s_triangle {
 	t_color		color;
 }				t_triangle;
 
-
-t_sphere		*new_sphere(char **params);
-t_plane			*new_plane(char **params);
-t_square		*new_square(char **params);
-t_triangle		*new_triangle(char **params);
-t_cylinder		*new_cylinder(char **params);
+t_sphere		*new_sphere(char **params, int *errcode);
+t_plane			*new_plane(char **params, int *errcode);
+t_square		*new_square(char **params, int *errcode);
+t_triangle		*new_triangle(char **params, int *errcode);
+t_cylinder		*new_cylinder(char **params, int *errcode);
 
 #endif

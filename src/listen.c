@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:16:42 by aroque            #+#    #+#             */
-/*   Updated: 2020/08/25 11:53:04 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 20:13:11 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 #include "camera.h"
 #include "libft.h"
 
-
 static int		exit_hook(t_server *x)
 {
 	free_server(x);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
 
 static int		key_press_hook(int keycode, t_server *x)
@@ -34,11 +33,13 @@ static int		key_press_hook(int keycode, t_server *x)
 	return (0);
 }
 
-
 unsigned int	mlx_listen(t_server *x)
 {
-	mlx_hook(x->window->window, KeyPress, KeyPressMask, key_press_hook, x);
-	mlx_hook(x->window->window, DestroyNotify, StructureNotifyMask, exit_hook, x);
+	t_window *w;
+
+	w = x->window->window;
+	mlx_hook(w, KeyPress, KeyPressMask, key_press_hook, x);
+	mlx_hook(w, DestroyNotify, StructureNotifyMask, exit_hook, x);
 	mlx_loop(x->mlx);
 	return (0);
 }
