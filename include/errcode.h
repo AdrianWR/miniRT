@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 14:56:26 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 20:23:17 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 22:42:56 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ typedef enum	e_errcode {
 	EBADVEC,
 	EBADCLR,
 	EOURCLR,
+	EOURINT,
+	EOURFOV,
+	EOURVEC,
 	EINVID,
 	__ERRMAX
 }				t_errcode;
@@ -37,6 +40,9 @@ static char *g_errstr[__ERRMAX] = {
 	"Bad formatted vector",
 	"Bad formatted color",
 	"Color out of range",
+	"Light intensity out of range",
+	"Field of view out of range",
+	"Orientation vector out of range",
 	"Invalid element identifier",
 };
 

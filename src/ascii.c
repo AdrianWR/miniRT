@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 19:25:40 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 20:05:20 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 22:49:00 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@ unsigned		strarray_len(char **params)
 	while (params[i])
 		i++;
 	return (i);
+}
+
+bool			out_of_range_vector(t_vector v)
+{
+	bool our;
+
+	our = false;
+	our |= v.x < -1 || v.x > 1;
+	our |= v.y < -1 || v.y > 1;
+	our |= v.z < -1 || v.z > 1;
+	return (our);
 }
 
 /*

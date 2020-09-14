@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 17:24:59 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 20:05:20 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 22:52:26 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ t_square			*new_square(char **params, int *errcode)
 	square->side = ft_atof(params[2]);
 	square->center = ft_atov(params[1], errcode);
 	square_vertex(square);
+	if (out_of_range_vector(square->normal))
+		*errcode = EOURVEC;
 	return (square);
 }
 

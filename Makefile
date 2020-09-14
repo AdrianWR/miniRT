@@ -6,7 +6,7 @@
 #    By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/23 10:13:02 by aroque            #+#    #+#              #
-#    Updated: 2020/09/13 20:19:20 by aroque           ###   ########.fr        #
+#    Updated: 2020/09/13 22:41:36 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,12 @@ LIBVECTOR		=	${LIBVECTOR_DIR}/libvector.a
 MODULES		=	${MLX_DIR} ${LIBFT_DIR} ${LIBVECTOR_DIR}
 
 INCLUDE_DIR	=	./include
-INCLUDE		=	${INCLUDE_DIR}/camera.h \
-				${INCLUDE_DIR}/color.h	\
-				${INCLUDE_DIR}/ray.h	\
-				${INCLUDE_DIR}/server.h	\
-				${INCLUDE_DIR}/scene.h	\
+INCLUDE		=	${INCLUDE_DIR}/camera.h 	\
+				${INCLUDE_DIR}/color.h		\
+				${INCLUDE_DIR}/ray.h		\
+				${INCLUDE_DIR}/server.h		\
+				${INCLUDE_DIR}/scene.h		\
+				${INCLUDE_DIR}/errcode.h	\
 				${INCLUDE_DIR}/figures.h
 
 CC			=	clang

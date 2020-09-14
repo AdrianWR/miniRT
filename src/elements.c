@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 15:58:26 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 20:05:20 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/13 22:49:58 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,19 @@ static float	deg2rad(float deg)
 t_camera		*new_cam(char **params, int *errcode)
 {
 	t_camera	*camera;
+	float		fov;
 
 	if (strarray_len(params) != 4 && (*errcode = EBADFMT))
 		return (NULL);
 	if (!(camera = malloc(sizeof(*camera))))
 		return (NULL);
-	camera->fov = deg2rad(ft_atof(params[3]));
+	if ((fov = ft_atof(params[3])) < 0 || fov > 180)
+		*errcode = EOURFOV;
+	camera->fov = deg2rad(fov);
 	camera->direction = ft_atov(params[2], errcode);
 	camera->origin = ft_atov(params[1], errcode);
+	if (out_of_range_vector(camera->direction))
+		*errcode = EOURVEC;
 	return (camera);
 }
 
@@ -48,6 +53,8 @@ t_light			*new_ambient_light(char **params, int *errcode)
 		return (NULL);
 	light->color = ft_atoc(params[2], errcode);
 	light->brightness = ft_atof(params[1]);
+	if (light->brightness < 0 || light->brightness > 1)
+		*errcode = EOURINT;
 	set = true;
 	return (light);
 }
@@ -62,6 +69,8 @@ t_light			*new_light(char **params, int *errcode)
 		return (NULL);
 	light->color = ft_atoc(params[3], errcode);
 	light->brightness = ft_atof(params[2]);
+	if (light->brightness < 0 || light->brightness > 1)
+		*errcode = EOURINT;
 	light->position = ft_atov(params[1], errcode);
 	return (light);
 }
