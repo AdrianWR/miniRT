@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 14:02:59 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 20:11:02 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/14 15:39:29 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-void			init_cameras(t_list *camset, t_window win)
+void			init_cameras(t_list *camset, unsigned width, unsigned height)
 {
 	float		vp[2];
 	t_vector	u;
@@ -31,7 +31,7 @@ void			init_cameras(t_list *camset, t_window win)
 	{
 		camera = (t_camera *)camset->content;
 		vp[0] = 2 * tan(camera->fov / 2);
-		vp[1] = vp[0] * (float)win.height / win.width;
+		vp[1] = vp[0] * (float)height / width;
 		camera->direction = scale(camera->direction, -1);
 		w = norm(camera->direction);
 		u = cross(vector(0, 1, 0), w);

@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 11:50:06 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 20:11:39 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/14 15:43:08 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,13 @@ void			free_world(t_world *world)
 
 void			free_server(t_server *x)
 {
+	if (x->window)
+	{
+		mlx_clear_window(x->mlx, x->window);
+		mlx_destroy_window(x->mlx, x->window);
+	}
 	mlx_destroy_image(x->mlx, x->image->image);
-	mlx_clear_window(x->mlx, x->window->window);
-	mlx_destroy_window(x->mlx, x->window->window);
 	free_world(x->world);
-	free(x->window);
 	free(x->image);
 	free(x);
 }

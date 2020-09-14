@@ -6,7 +6,7 @@
 #    By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/23 10:13:02 by aroque            #+#    #+#              #
-#    Updated: 2020/09/13 22:41:36 by aroque           ###   ########.fr        #
+#    Updated: 2020/09/14 14:55:12 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ INCLUDE		=	${INCLUDE_DIR}/camera.h 	\
 				${INCLUDE_DIR}/server.h		\
 				${INCLUDE_DIR}/scene.h		\
 				${INCLUDE_DIR}/errcode.h	\
+				${INCLUDE_DIR}/bitmap.h		\
 				${INCLUDE_DIR}/figures.h
 
 CC			=	clang
@@ -58,6 +59,7 @@ LD_FLAGS	=	-L${LIBFT_DIR}		\
 SRC_DIR	=	./src
 SRC		= 	${SRC_DIR}/server.c			\
 			${SRC_DIR}/ray.c			\
+			${SRC_DIR}/bitmap.c			\
 			${SRC_DIR}/camera.c			\
 			${SRC_DIR}/color.c			\
 			${SRC_DIR}/minirt.c			\

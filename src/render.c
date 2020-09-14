@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:44:08 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/12 00:43:48 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/14 15:37:51 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,19 @@ void			render(t_server *x)
 	t_ray		ray;
 	t_color		pixel_color;
 
-	j = x->window->height;
+	j = x->height;
 	while (--j)
 	{
-		i = x->window->width;
+		i = x->width;
 		while (--i)
 		{
 			ray = generate_ray(x->world->cameras->content,
-					(float)i / x->window->width, (float)j / x->window->height);
+					(float)i / x->width, (float)j / x->height);
 			pixel_color = raytrace(&ray, x->world);
-			put_pixel(x, i, x->window->height - 1 - j, pixel_color);
+			put_pixel(x, i, x->height - 1 - j, pixel_color);
 		}
 	}
-	mlx_put_image_to_window(x->mlx, x->window->window, x->image->image, 0, 0);
+	if (!x->windowless)
+		mlx_put_image_to_window(x->mlx, x->window,
+								x->image->image, 0, 0);
 }

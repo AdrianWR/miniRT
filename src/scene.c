@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:44:29 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 20:17:05 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/14 15:33:38 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static t_world	*new_world(void)
 	return (world);
 }
 
-t_server		*scene_initializer(const char *file)
+t_world		*scene_initializer(const char *file)
 {
 	int			fd;
 	int			err;
@@ -75,5 +75,5 @@ t_server		*scene_initializer(const char *file)
 		message_and_exit(err, note);
 	}
 	close(fd);
-	return (new_server(world));
+	return (world);
 }

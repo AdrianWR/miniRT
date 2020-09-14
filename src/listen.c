@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:16:42 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 20:13:11 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/14 15:31:00 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static int		key_press_hook(int keycode, t_server *x)
 
 unsigned int	mlx_listen(t_server *x)
 {
-	t_window *w;
+	void *w;
 
-	w = x->window->window;
+	w = x->window;
 	mlx_hook(w, KeyPress, KeyPressMask, key_press_hook, x);
 	mlx_hook(w, DestroyNotify, StructureNotifyMask, exit_hook, x);
 	mlx_loop(x->mlx);
