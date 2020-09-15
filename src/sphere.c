@@ -6,15 +6,15 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:42:24 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 11:02:17 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:29:21 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 #include "vector.h"
 #include "figures.h"
-#include "scene.h"
 #include "errcode.h"
+#include "server.h"
 #include <math.h>
 #include <stdlib.h>
 #include <stdbool.h>

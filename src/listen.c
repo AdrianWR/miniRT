@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:16:42 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/14 15:31:00 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:53:59 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 static int		exit_hook(t_server *x)
 {
-	free_server(x);
+	free_server(x, 0);
 	exit(EXIT_SUCCESS);
 }
 
