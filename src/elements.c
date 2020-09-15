@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 15:58:26 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 22:49:58 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 10:59:24 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_camera		*new_cam(char **params, int *errcode)
 		return (NULL);
 	if (!(camera = malloc(sizeof(*camera))))
 		return (NULL);
-	if ((fov = ft_atof(params[3])) < 0 || fov > 180)
+	if ((fov = ft_atof(params[3], errcode)) < 0 || fov > 180)
 		*errcode = EOURFOV;
 	camera->fov = deg2rad(fov);
 	camera->direction = ft_atov(params[2], errcode);
@@ -52,7 +52,7 @@ t_light			*new_ambient_light(char **params, int *errcode)
 	if (!(light = malloc(sizeof(*light))))
 		return (NULL);
 	light->color = ft_atoc(params[2], errcode);
-	light->brightness = ft_atof(params[1]);
+	light->brightness = ft_atof(params[1], errcode);
 	if (light->brightness < 0 || light->brightness > 1)
 		*errcode = EOURINT;
 	set = true;
@@ -68,7 +68,7 @@ t_light			*new_light(char **params, int *errcode)
 	if (!(light = malloc(sizeof(*light))))
 		return (NULL);
 	light->color = ft_atoc(params[3], errcode);
-	light->brightness = ft_atof(params[2]);
+	light->brightness = ft_atof(params[2], errcode);
 	if (light->brightness < 0 || light->brightness > 1)
 		*errcode = EOURINT;
 	light->position = ft_atov(params[1], errcode);

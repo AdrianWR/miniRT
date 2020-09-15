@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 19:25:40 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 22:49:00 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:23:54 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,25 @@
 #include "libft.h"
 #include "color.h"
 #include "errcode.h"
+#include "scene.h"
 #include <math.h>
 
-unsigned		strarray_len(char **params)
+
+static bool		invalid_number(const char *arg)
 {
-	unsigned	i;
+	bool 		inv;
+	int			i;
 
-	i = 0;
-	while (params[i])
-		i++;
-	return (i);
-}
-
-bool			out_of_range_vector(t_vector v)
-{
-	bool our;
-
-	our = false;
-	our |= v.x < -1 || v.x > 1;
-	our |= v.y < -1 || v.y > 1;
-	our |= v.z < -1 || v.z > 1;
-	return (our);
+	i = -1;
+	inv = false;
+	while (arg[++i])
+	{
+		if (i == 0)
+			inv |= (!ft_isdigit(arg[i]) & (arg[i] != '+') & (arg[i] != '-'));
+		else
+			inv |= (!ft_isdigit(arg[i]) & (arg[i] != '.'));
+	}
+	return (inv);
 }
 
 /*
@@ -46,7 +44,7 @@ bool			out_of_range_vector(t_vector v)
 ** os identified, the function returns 0 (zero).
 */
 
-float			ft_atof(const char *str)
+float			ft_atof(const char *str, int *errcode)
 {
 	float		n;
 	float		d;
@@ -57,8 +55,8 @@ float			ft_atof(const char *str)
 	d = 0.0;
 	i = -1;
 	signal = 1;
-	while (ft_isspace(*str))
-		str++;
+	if (invalid_number(str))
+		*errcode = EINVID;
 	if (*str == '+' || *str == '-')
 		if (*str++ == '-')
 			signal = -1;
@@ -82,9 +80,9 @@ t_vector		ft_atov(char *s, int *errcode)
 		v = vector(0, 0, 0);
 	else
 	{
-		v.x = ft_atof(split[0]);
-		v.y = ft_atof(split[1]);
-		v.z = ft_atof(split[2]);
+		v.x = ft_atof(split[0], errcode);
+		v.y = ft_atof(split[1], errcode);
+		v.z = ft_atof(split[2], errcode);
 	}
 	free_array((void **)split);
 	return (v);
@@ -118,6 +116,8 @@ t_color			ft_atoc(char *s, int *errcode)
 	{
 		while (i < 3)
 		{
+			if (invalid_number(split[i]))
+				*errcode = EINVID;
 			prim = ft_atoi(split[i]);
 			if (prim < 0 || prim > 0xFF)
 				*errcode = EOURCLR;

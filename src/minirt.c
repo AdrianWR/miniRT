@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 10:48:18 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/14 22:56:58 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:19:32 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 int		main(int argc, char *argv[])
 {
+	int			err;
 	t_world		*world;
 	t_server	*x;
 
@@ -30,8 +31,11 @@ int		main(int argc, char *argv[])
 	{
 		x = new_server(world, true);
 		render(x);
-		export_bitmap(*x);
-		free_server(x);
+		if ((err = export_bitmap(*x)) > 0)
+		{
+			free_server(x);
+			message_and_exit(err, 0x0);
+		}
 	}
 	else
 	{

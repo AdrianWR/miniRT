@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:44:32 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 22:54:22 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:01:48 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ t_cylinder		*new_cylinder(char **params, int *errcode)
 		return (NULL);
 	cylinder->type = CYLINDER;
 	cylinder->color = ft_atoc(params[5], errcode);
-	cylinder->height = ft_atof(params[4]);
-	cylinder->radius = ft_atof(params[3]) / 2;
+	cylinder->height = ft_atof(params[4], errcode);
+	cylinder->radius = ft_atof(params[3], errcode) / 2;
 	cylinder->axis = ft_atov(params[2], errcode);
 	cylinder->center = ft_atov(params[1], errcode);
 	if (out_of_range_vector(cylinder->axis))

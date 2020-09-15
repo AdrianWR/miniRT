@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:42:24 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 20:05:20 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:02:17 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_sphere			*new_sphere(char **params, int *errcode)
 		return (NULL);
 	sphere->type = SPHERE;
 	sphere->color = ft_atoc(params[3], errcode);
-	sphere->radius = atof(params[2]) / 2;
+	sphere->radius = ft_atof(params[2], errcode) / 2;
 	sphere->center = ft_atov(params[1], errcode);
 	return (sphere);
 }

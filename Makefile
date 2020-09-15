@@ -6,7 +6,7 @@
 #    By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/23 10:13:02 by aroque            #+#    #+#              #
-#    Updated: 2020/09/14 17:37:08 by aroque           ###   ########.fr        #
+#    Updated: 2020/09/15 11:24:52 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ SRC		= 	${SRC_DIR}/server.c			\
 			${SRC_DIR}/errcode.c		\
 			${SRC_DIR}/parser.c			\
 			${SRC_DIR}/elements.c		\
+			${SRC_DIR}/utils.c		\
 			${SRC_DIR}/free.c
 
 
@@ -115,6 +116,6 @@ fclean: clean
 re: fclean all
 
 test: all
-	./$(NAME) ./examples/board.rt --save
+	./$(NAME) ./examples/board.rt
 
 bonus: re

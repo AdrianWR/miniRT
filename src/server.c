@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:39:42 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/14 15:39:06 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 10:25:39 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ t_server		*new_server(t_world *world, bool windowless)
 		return (NULL);
 	x->mlx = mlx_init();
 	mlx_get_screen_size(x->mlx, &width, &height);
-	if (world->resolution[0] < width)
-		width = world->resolution[0];
-	if (world->resolution[1] < height)
-		height = world->resolution[1];
-	if ((x->image = new_image(x, width, height)) == NULL)
-		return (NULL);
+	if ((world->resolution[0] > width) && !windowless)
+		world->resolution[0] = width;
+	if ((world->resolution[1] > height) && !windowless)
+		world->resolution[1] = height;
 	x->world = world;
-	x->width = width;
-	x->height = height;
+	x->width = world->resolution[0];
+	x->height = world->resolution[1];
 	x->windowless = windowless;
-	init_cameras(world->cameras, width, height);
+	init_cameras(world->cameras, x->width, x->height);
+	if ((x->image = new_image(x, x->width, x->height)) == NULL)
+		return (NULL);
 	if (!windowless)
-		x->window = mlx_new_window(x->mlx, width, height, TITLE);
+		x->window = mlx_new_window(x->mlx, x->width, x->height, TITLE);
 	return (x);
 }
 

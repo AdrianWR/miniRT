@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 15:11:26 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/14 15:54:05 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:13:08 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void			message_and_exit(t_errcode code, char *note)
 {
 	ft_putstr_fd("Error\n", STDERR_FILENO);
-	if (errno && !code)
+	if (errno && code == ERRSYS)
 		perror("");
 	else if (code > 0)
 	{
