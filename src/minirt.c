@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 10:48:18 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/14 15:41:26 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/14 22:56:58 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int		main(int argc, char *argv[])
 	if (argc == 3)
 	{
 		x = new_server(world, true);
-		export_bitmap(*x->image);
+		render(x);
+		export_bitmap(*x);
 		free_server(x);
 	}
 	else

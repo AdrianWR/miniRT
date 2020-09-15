@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 14:56:26 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 22:42:56 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/14 15:54:52 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <errno.h>
 
 typedef enum	e_errcode {
-	__ERRNONE,
+	ERRSYS,
 	EUSAGE,
 	EBADFRT,
 	EBADFMT,
@@ -32,7 +32,7 @@ typedef enum	e_errcode {
 }				t_errcode;
 
 static char *g_errstr[__ERRMAX] = {
-	"__ERRNONE",
+	"__ERRSYS",
 	"Usage: ./miniRT <scene_file> [--save]",
 	"Bad file descriptor on <.rt> file",
 	"Bad element declaration",

@@ -6,7 +6,7 @@
 #    By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/23 10:13:02 by aroque            #+#    #+#              #
-#    Updated: 2020/09/14 14:55:12 by aroque           ###   ########.fr        #
+#    Updated: 2020/09/14 17:37:08 by aroque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,6 +115,6 @@ fclean: clean
 re: fclean all
 
 test: all
-	./$(NAME) ./examples/board.rt
+	./$(NAME) ./examples/board.rt --save
 
 bonus: re
