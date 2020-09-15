@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:44:29 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 11:20:16 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:50:13 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "libft.h"
-#include "scene.h"
 #include "camera.h"
 #include "server.h"
-#include "errcode.h"
 
 /*
 **	open_scene_file(): Open the scene file as a file
@@ -69,11 +67,13 @@ t_world			*scene_initializer(const char *file)
 	if ((fd = open_scene_file(file)) < 0)
 		message_and_exit(EBADFRT, 0x0);
 	world = new_world();
-	if ((err = parser_file(fd, world, &note)))
+	err = parser_file(fd, world, &note);
+	if ((close(fd)) < 0)
+		message_and_exit(ERRSYS, 0x0);
+	if (err)
 	{
 		free_world(world);
 		message_and_exit(err, note);
 	}
-	close(fd);
 	return (world);
 }

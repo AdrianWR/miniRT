@@ -6,21 +6,18 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 19:25:40 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 11:23:54 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:45:15 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 #include "libft.h"
 #include "color.h"
-#include "errcode.h"
-#include "scene.h"
 #include <math.h>
-
 
 static bool		invalid_number(const char *arg)
 {
-	bool 		inv;
+	bool		inv;
 	int			i;
 
 	i = -1;

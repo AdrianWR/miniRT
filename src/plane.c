@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:00 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 22:52:45 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:30:28 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 #include "libft.h"
 #include "vector.h"
 #include "figures.h"
-#include "scene.h"
-#include "errcode.h"
+#include "server.h"
 #include <stdbool.h>
 
 t_plane		*new_plane(char **params, int *errcode)

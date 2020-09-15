@@ -6,18 +6,17 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:44:32 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 11:01:48 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:30:14 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 #include "vector.h"
 #include "figures.h"
-#include "errcode.h"
+#include "server.h"
 #include <math.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "scene.h"
 
 t_cylinder		*new_cylinder(char **params, int *errcode)
 {

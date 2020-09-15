@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 11:50:06 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/14 15:43:08 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:53:10 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void			free_world(t_world *world)
 	free(world);
 }
 
-void			free_server(t_server *x)
+void			free_server(t_server *x, int errcode)
 {
 	if (x->window)
 	{
@@ -46,4 +46,6 @@ void			free_server(t_server *x)
 	free_world(x->world);
 	free(x->image);
 	free(x);
+	if (errcode)
+		message_and_exit(errcode, 0x0);
 }

@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 17:16:37 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/03 21:40:51 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:44:14 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "figures.h"
 # include <stdbool.h>
 
-# define EPSILON 0.0001
+# define EPSILON	0.0001
 
 typedef struct	s_hit {
 	t_vector	normal;

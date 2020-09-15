@@ -6,3 +6,4 @@ miniRT
 /lib/**/*.o
 /lib/**/*.a
 /lib/minilibx/test/*
+*.bmp

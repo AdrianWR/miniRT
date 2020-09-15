@@ -6,11 +6,10 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 15:58:26 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 10:59:24 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:31:05 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
 #include "light.h"
 #include "camera.h"
 #include "errcode.h"

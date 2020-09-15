@@ -6,14 +6,14 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 23:56:26 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/13 20:05:20 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:29:38 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 #include "vector.h"
 #include "figures.h"
-#include "scene.h"
+#include "server.h"
 #include <stdbool.h>
 #include <math.h>
 

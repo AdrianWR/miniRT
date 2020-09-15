@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 14:02:59 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/14 15:39:29 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:28:24 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "libft.h"
 #include "server.h"
 #include "ray.h"
-#include "scene.h"
 #include <stdlib.h>
 #include <math.h>
 

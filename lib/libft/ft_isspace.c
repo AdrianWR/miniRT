@@ -6,10 +6,9 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 23:21:57 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/11 23:22:06 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:59:33 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 /*
 **	Check if a char is ASCII space, tabulation, carriage return
