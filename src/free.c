@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 11:50:06 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 11:53:10 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 15:15:28 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void			free_world(t_world *world)
 	ft_lstclear(&world->lights, free);
 	ft_lstclear(&cam, free);
 	free(world->ambient);
+	free(world->resolution);
 	free(world);
 }
 

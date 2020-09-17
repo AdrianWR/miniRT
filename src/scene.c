@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:44:29 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 11:50:13 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 15:48:07 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,20 @@
 **	Return: fd number in case of success, -1 otherwise.
 */
 
-static int		open_scene_file(const char *file)
+static int		open_scene_file(const char *file, int *errcode)
 {
 	int		fd;
 	char	*ext;
 
+	fd = -1;
 	ext = ft_strrchr(file, '.');
-	if (!ext)
-		fd = -1;
-	else if (ft_strncmp(ext, EXTENSION, 0x100))
-		fd = -1;
+	if (ext && !ft_strncmp(ext, EXTENSION, 0x100))
+	{
+		if ((fd = open(file, O_RDONLY)) < 0)
+			*errcode = ERRSYS;
+	}
 	else
-		fd = open(file, O_RDONLY);
+		*errcode = EBADEXT;
 	return (fd);
 }
 
@@ -54,6 +56,8 @@ static t_world	*new_world(void)
 	world->cameras = NULL;
 	world->lights = NULL;
 	world->figures = NULL;
+	world->ambient = NULL;
+	world->resolution = NULL;
 	return (world);
 }
 
@@ -64,8 +68,9 @@ t_world			*scene_initializer(const char *file)
 	char		*note;
 	t_world		*world;
 
-	if ((fd = open_scene_file(file)) < 0)
-		message_and_exit(EBADFRT, 0x0);
+	err = 0;
+	if ((fd = open_scene_file(file, &err)) < 0)
+		message_and_exit(err, 0x0);
 	world = new_world();
 	err = parser_file(fd, world, &note);
 	if ((close(fd)) < 0)

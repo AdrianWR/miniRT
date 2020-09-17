@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:00 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 11:30:28 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 12:47:33 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_plane		*new_plane(char **params, int *errcode)
 	if (!(plane = malloc(sizeof(*plane))))
 		return (NULL);
 	plane->type = PLANE;
-	plane->color = ft_atoc(params[3], errcode);
-	plane->normal = ft_atov(params[2], errcode);
 	plane->point = ft_atov(params[1], errcode);
+	plane->normal = ft_atov(params[2], errcode);
+	plane->color = ft_atoc(params[3], errcode);
 	if (out_of_range_vector(plane->normal))
 		*errcode = EOURVEC;
 	return (plane);

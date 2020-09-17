@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 14:56:26 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 11:12:09 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 15:42:52 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ typedef enum	e_errcode {
 	__ERRNONE,
 	ERRSYS,
 	EUSAGE,
-	EBADFRT,
+	EBADEXT,
 	EBADFMT,
 	EREPEAT,
+	ENOTRES,
+	ENOTAMB,
 	EBADVEC,
 	EBADCLR,
 	EOURCLR,
@@ -34,11 +36,13 @@ typedef enum	e_errcode {
 
 static char *g_errstr[__ERRMAX] = {
 	"__ERRNONE",
-	"System error"
+	"System error",
 	"Usage: ./miniRT <scene_file> [--save]",
-	"Bad file descriptor on <.rt> file",
+	"Bad extension on scene file",
 	"Bad element declaration",
 	"Repeated element",
+	"Mandatory element resolution not found",
+	"Mandatory element ambient light not found",
 	"Bad formatted vector",
 	"Bad formatted color",
 	"Color out of range",

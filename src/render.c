@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:44:08 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/14 15:37:51 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 21:01:08 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ void			render(t_server *x)
 	t_color		pixel_color;
 
 	j = x->height;
-	while (--j)
+	while (j-- > 0)
 	{
 		i = x->width;
-		while (--i)
+		while (i-- > 0)
 		{
 			ray = generate_ray(x->world->cameras->content,
 					(float)i / x->width, (float)j / x->height);

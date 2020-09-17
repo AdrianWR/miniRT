@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:20:31 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 12:00:12 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 15:27:24 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 # define TITLE		"miniRT"
 
 typedef struct		s_world {
+	int				*resolution;
 	t_list			*figures;
 	t_list			*lights;
 	t_list			*cameras;
 	t_light			*ambient;
-	int				resolution[2];
 }					t_world;
 
 typedef struct		s_image

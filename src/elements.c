@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 15:58:26 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 11:31:05 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 12:37:24 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_camera		*new_cam(char **params, int *errcode)
 	camera->origin = ft_atov(params[1], errcode);
 	if (out_of_range_vector(camera->direction))
 		*errcode = EOURVEC;
+	camera->direction = norm(camera->direction);
 	return (camera);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 17:24:59 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 11:29:58 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/15 12:46:59 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ t_square			*new_square(char **params, int *errcode)
 	if (!(square = malloc(sizeof(*square))))
 		return (NULL);
 	square->type = SQUARE;
-	square->color = ft_atoc(params[4], errcode);
-	square->normal = ft_atov(params[3], errcode);
-	square->side = ft_atof(params[2], errcode);
 	square->center = ft_atov(params[1], errcode);
+	square->normal = ft_atov(params[2], errcode);
+	square->side = ft_atof(params[3], errcode);
+	square->color = ft_atoc(params[4], errcode);
 	square_vertex(square);
 	if (out_of_range_vector(square->normal))
 		*errcode = EOURVEC;
