@@ -34,7 +34,7 @@ Besides the primitives, the raytracer takes information of *cameras*, *spherical
 ### Coordinates System
 The entire vecotr space in which this program is built is a cartesian tridimensional space, based on an orthonormal basis. Therefore, the distance between unit interval along all axis is the same, and, with a camera with viewport based on the *x* and *y* axis, the orientation vector will point to the *-z* axis. As counterintuitive it seems, it's easy to proof with the right-hand rule. The following image describes how a camera sees the viewport, with an inverted *-z* axis. 
 
-![CC BY-SA 4.0](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/RaysViewportSchema.png/511px-RaysViewportSchema.png)
+![Image created by Kamil Kielczewski, available under CC BY-SA 4.0 license](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/RaysViewportSchema.png/511px-RaysViewportSchema.png)
 
 ## Describing a Scene
 
