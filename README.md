@@ -4,6 +4,8 @@ Simple ray-tracer program written in C. Takes a scene file and renders its conte
 ## Motivation
 This project was made as part of the 42 São Paulo curriculum, with the main pedagogic focus on the computer graphics branch. A [raytracer](https://en.wikipedia.org/wiki/Ray_tracing_(graphics)) is a special algorithm, developed to render tridimensional scenes with the highest level of realism. To acheive this result, a raytracer calculates the intersection of a ray if light, originated from the camera of the spectator, to the objects in the scene. The physical properties of the ray can be simulated with precision, so a modest raytracer can render lights, shadows and surfaces with a reasonable degree of fidelity.
 
+---
+
 ## Dependencies
 
 ## Compilation and Execution
@@ -16,6 +18,8 @@ The compilation is made upon the execution of the `make` command on the root dir
 The first command takes a scene file and renderizes it with a new X Server instance. By using this method, the user can iterate through several cameras on the scene, changing the perspective in any way desired. If the scene resolution is greater than the screen dimensions, the window will be resized to the maximum screen size.
 
 The second command doesn't open a new window with a live scene, but renders the image present at the first camera available and export the image to a *bitmap* file. The bitmap header follows the 40 bit DIB size standard (BITMAPINFOHEADER), with 24 bits color. The screen size restriction does not apply to this rendering option, so it's possible to generate scene images with resolution greater than the screen.
+
+---
 
 # The RayTracer
 
