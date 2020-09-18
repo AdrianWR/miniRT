@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:44:08 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 21:01:08 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/18 00:38:45 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void			render(t_server *x)
 	t_ray		ray;
 	t_color		pixel_color;
 
+	if (!x->world->cameras)
+		return ;
 	j = x->height;
 	while (j-- > 0)
 	{
