@@ -67,4 +67,6 @@ Detailed information on how to describe a scene can be found at [Describing a Sc
 
 ![](./images/board.jpg)
 
+![](./images/spheres.jpg)
+
 ![](./images/pokeball.jpg)
