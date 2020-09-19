@@ -65,20 +65,55 @@ Here are some boilerplates to create a scene based on the `miniRT` scene identif
 
     R    x    y
 
-- `R` (char): Resolution identifier;
-- `x` (unsigned int): Image resolution on the X axis;
-- `y` (unsigned int): Image resolution on the Y axis.
+- `R` (**char**): Resolution identifier;
+- `x` (**unsigned int**): Image resolution on the X axis;
+- `y` (**unsigned int**): Image resolution on the Y axis.
 
 Example: `R  800  600`
+
 Note: This element is mandatory, and must be unique.
 
 ###### Ambient Lighting
 
     A    intensity    color
 
-- `A` (char): Ambient lighting identifier;
-- `intensity` (float in range [0; 1]): Ambient light overall intensity;
-- `color` ((int, int, int) in range [0; 255]): Ambient lighting color in RGB format.
+- `A` (**char**): Ambient lighting identifier;
+- `intensity` (**float in range [0; 1]**): Ambient light overall intensity;
+- `color` (**int[3] in range [0; 255]**): Ambient lighting color in RGB format.
 
 Example: `A   0.4   255,255,255`
+
 Note: This element is mandatory, and must be unique.
+
+###### Cameras
+
+    c    origin    orientation    fov
+
+- `c` (**char**): Camera identifier;
+- `origin` (**float[3]**): Camera origin point in the vector space
+- `orientation` (**float[3] in range [-1; 1]**): Normalized camera orientation vector in the vector space.
+- `fov` (**float**): Camera field of view, in degrees.
+
+Example: `c    0,1,1    0,-0.25,-0.75    66`
+
+###### Lights
+
+    l    origin    intensity    color
+
+- `l` (**char**): Light identifier;
+- `origin` (**float[3]**): Point of origin of the spherical light;
+- `intensity` (**float in range [0; 1]**): Light overall intensity, decreasing with the square of the distance;
+- `color` (**int[3] in range [0; 255]**): Light color in RGB format.
+
+Example: `l    0,4,3    0.25    0,255,0`
+
+###### Planes
+
+    pl    origin    normal    color
+
+- `l` (**char * **): Plane identifier;
+- `origin` (**float[3]**): Plane origin point in the vector space;
+- `normal` (**float[3] in range [-1; 1]**): Normalizad plane orientation vector in the vector space;
+- `color` (**int[3] in range [0; 255]**): Plane color in RGB format.
+
+Example: `pl    0,-1,0    0,1,0    255,255,0`
