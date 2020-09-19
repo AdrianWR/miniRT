@@ -25,7 +25,7 @@ The compilation is made upon the execution of the `make` command on the root dir
     ./miniRT <scene-file.rt>
     ./miniRT <scene-file.rt> --save
     
-The first command takes a scene file and renderizes it with a new X Server instance. By using this method, the user can iterate through several cameras on the scene, changing the perspective in any way desired. If the scene resolution is greater than the screen dimensions, the window will be resized to the maximum screen size.
+The first command takes a scene file and renderizes it with a new X Server instance. By using this method, the user can iterate through several cameras on the scene, changing the perspective in any way desired. If the scene resolution is greater than the screen dimensions, the window will be resized to the maximum screen size. If you have multiple cameras, it's possible to navigate through them with **Left Arrow** and **Right Arrow** keys. To terminate the execution, press the **Esc** key or click on the little *X* at the window bar.
 
 The second command doesn't open a new window with a live scene, but renders the image present at the first camera available and export the image to a *bitmap* file. The bitmap header follows the 40 bit DIB size standard (BITMAPINFOHEADER), with 24 bits color. The screen size restriction does not apply to this rendering option, so it's possible to generate scene images with resolution greater than the screen.
 
