@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 14:56:26 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 15:42:52 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/19 01:14:29 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum	e_errcode {
 	__ERRMAX
 }				t_errcode;
 
-static char *g_errstr[__ERRMAX] = {
+static char		*g_errstr[__ERRMAX] = {
 	"__ERRNONE",
 	"System error",
 	"Usage: ./miniRT <scene_file> [--save]",

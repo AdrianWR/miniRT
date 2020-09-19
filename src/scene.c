@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:44:29 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 15:48:07 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/19 01:11:59 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ t_world			*scene_initializer(const char *file)
 	t_world		*world;
 
 	err = 0;
+	note = NULL;
 	if ((fd = open_scene_file(file, &err)) < 0)
 		message_and_exit(err, 0x0);
 	world = new_world();
