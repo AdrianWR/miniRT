@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:48:22 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 15:48:44 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/18 23:39:58 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int				parser_file(int fd, t_world *world, char **note)
 		}
 		free(line);
 	}
+	free(line);
 	if (!world->resolution && !errcode)
 		errcode = ENOTRES;
 	else if (!world->ambient && !errcode)

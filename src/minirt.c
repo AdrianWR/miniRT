@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 10:48:18 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 11:54:46 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/19 00:05:30 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int		main(int argc, char *argv[])
 	else if (argc == 3 && ft_strncmp(argv[2], "--save", 7))
 		message_and_exit(EUSAGE, 0x0);
 	world = scene_initializer(argv[1]);
-	x = new_server(world, windowless);
+	if (!(x = new_server(world, windowless)))
+		message_and_exit(ERRSYS, 0x0);
 	render(x);
 	if (windowless)
 	{

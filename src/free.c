@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 11:50:06 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 15:15:28 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/19 00:00:38 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void			free_server(t_server *x, int errcode)
 	mlx_destroy_image(x->mlx, x->image->image);
 	free_world(x->world);
 	free(x->image);
+	free(x->mlx);
 	free(x);
 	if (errcode)
 		message_and_exit(errcode, 0x0);
