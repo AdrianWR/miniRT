@@ -43,8 +43,7 @@ CC_FLAGS	=	-c					\
 				-I${MLX_DIR}		\
 				-I${LIBFT_DIR}		\
 				-I${LIBVECTOR_DIR}	\
-				-I${INCLUDE_DIR}	\
-				-g
+				-I${INCLUDE_DIR}
 
 LD_FLAGS	=	-L${LIBFT_DIR}		\
 				-L${LIBVECTOR_DIR}	\
