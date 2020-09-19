@@ -63,7 +63,7 @@ Empty lines on the scene file will not be accounted, and lines starting with `#`
 
 Here are some boilerplates to create a scene based on the `miniRT` scene identifiers. I'm gonna show up with examples and then explain briefly its effect on the scene and possible restrictions.
 
-##### Resolution
+#### Resolution
 
     R    x    y
 
@@ -75,7 +75,7 @@ Example: `R  800  600`
 
 Note: This element is mandatory, and must be unique.
 
-##### Ambient Lighting
+#### Ambient Lighting
 
     A    intensity    color
 
@@ -87,7 +87,7 @@ Example: `A   0.4   255,255,255`
 
 Note: This element is mandatory, and must be unique.
 
-##### Cameras
+#### Cameras
 
     c    origin    orientation    fov
 
@@ -98,7 +98,7 @@ Note: This element is mandatory, and must be unique.
 
 Example: `c    0,1,1    0,-0.25,-0.75    66`
 
-##### Lights
+#### Lights
 
     l    origin    intensity    color
 
@@ -109,7 +109,7 @@ Example: `c    0,1,1    0,-0.25,-0.75    66`
 
 Example: `l    0,4,3    0.25    0,255,0`
 
-##### Planes
+#### Planes
 
     pl    origin    normal    color
 
@@ -120,7 +120,7 @@ Example: `l    0,4,3    0.25    0,255,0`
 
 Example: `pl    0,-1,0    0,1,0    255,255,0`
 
-##### Spheres
+#### Spheres
 
     sp    origin    diameter    color
 
@@ -131,7 +131,7 @@ Example: `pl    0,-1,0    0,1,0    255,255,0`
 
 Example: `sp    0,0,-2    1.0    0,255,0`
 
-##### Squares
+#### Squares
 
     sq    center    normal    side_size    color
 
@@ -143,7 +143,7 @@ Example: `sp    0,0,-2    1.0    0,255,0`
 
 Example: `sq    0,0,-6    0,0,1    5.0    127,127,255`
 
-##### Cylinders
+#### Cylinders
 
     cy    origin    normal    diameter    height    color
 
@@ -156,7 +156,7 @@ Example: `sq    0,0,-6    0,0,1    5.0    127,127,255`
 
 Example: `sq    0,0,-6    0,0,1    5.0    127,127,255`
 
-##### Triangles
+#### Triangles
 
     cy    vertex   vertex    vertex    color
 
