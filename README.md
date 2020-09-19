@@ -51,6 +51,8 @@ The entire vecotr space in which this program is built is a cartesian tridimensi
 
 ![Image created by Kamil Kielczewski, available under CC BY-SA 4.0 license](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/RaysViewportSchema.png/511px-RaysViewportSchema.png)
 
+---
+
 ## Describing a Scene
 
 A mini raytracing scene can be identified by several elements, described on different lines on a `<.rt>` file. Each line must be initiated with an element identifier, which could comprises one or two characters, followed by parameters separated by one or more whitespaces.
@@ -61,7 +63,7 @@ Empty lines on the scene file will not be accounted, and lines starting with `#`
 
 Here are some boilerplates to create a scene based on the `miniRT` scene identifiers. I'm gonna show up with examples and then explain briefly its effect on the scene and possible restrictions.
 
-###### Resolution
+##### Resolution
 
     R    x    y
 
@@ -73,7 +75,7 @@ Example: `R  800  600`
 
 Note: This element is mandatory, and must be unique.
 
-###### Ambient Lighting
+##### Ambient Lighting
 
     A    intensity    color
 
@@ -85,7 +87,7 @@ Example: `A   0.4   255,255,255`
 
 Note: This element is mandatory, and must be unique.
 
-###### Cameras
+##### Cameras
 
     c    origin    orientation    fov
 
@@ -96,7 +98,7 @@ Note: This element is mandatory, and must be unique.
 
 Example: `c    0,1,1    0,-0.25,-0.75    66`
 
-###### Lights
+##### Lights
 
     l    origin    intensity    color
 
@@ -107,13 +109,59 @@ Example: `c    0,1,1    0,-0.25,-0.75    66`
 
 Example: `l    0,4,3    0.25    0,255,0`
 
-###### Planes
+##### Planes
 
     pl    origin    normal    color
 
-- `l` (**char * **): Plane identifier;
+- `pl` (**char \***): Plane identifier;
 - `origin` (**float[3]**): Plane origin point in the vector space;
-- `normal` (**float[3] in range [-1; 1]**): Normalizad plane orientation vector in the vector space;
+- `normal` (**float[3] in range [-1; 1]**): Normalized plane orientation vector in the vector space;
 - `color` (**int[3] in range [0; 255]**): Plane color in RGB format.
 
 Example: `pl    0,-1,0    0,1,0    255,255,0`
+
+##### Spheres
+
+    sp    origin    diameter    color
+
+- `sp` (**char \***): Sphere identifier;
+- `origin` (**float[3]**): Sphere origin point in the vector space;
+- `diameter` (**float**): Sphere diameter;
+- `color` (**int[3] in range [0; 255]**): Sphere color in RGB format.
+
+Example: `sp    0,0,-2    1.0    0,255,0`
+
+##### Squares
+
+    sq    center    normal    side_size    color
+
+- `sq` (**char \***): Square identifier;
+- `center` (**float[3]**): Square center point in the vector space;
+- `normal` (**float[3] in range [-1; 1]**): Normalized plane orientation vector;
+- `side_size` (**float**): Square side size;
+- `color` (**int[3] in range [0; 255]**): Square color in RGB format.
+
+Example: `sq    0,0,-6    0,0,1    5.0    127,127,255`
+
+##### Cylinders
+
+    cy    origin    normal    diameter    height    color
+
+- `cy` (**char \***): Cylinder identifier;
+- `origin` (**float[3]**): Cylinder origin point in the vector space;
+- `normal` (**float[3] in range [-1; 1]**): Normalized cylinder orientation vector;
+- `diameter` (**float**): Cylinder diameter;
+- `height` (**float**): Cylinder height;
+- `color` (**int[3] in range [0; 255]**): Cylinder color in RGB format.
+
+Example: `sq    0,0,-6    0,0,1    5.0    127,127,255`
+
+##### Triangles
+
+    cy    vertex   vertex    vertex    color
+
+- `tr` (**char \***): Triangle identifier;
+- `vertex` (**float[3]**): Each one of the triangle vertex, must be three;
+- `color` (**int[3] in range [0; 255]**): Triangle color in RGB format.
+
+Example: `tr    -2,-0.5,0    2,-0.5,0    0,-0.5,-5    0,127,255`

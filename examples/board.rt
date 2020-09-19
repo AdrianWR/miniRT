@@ -24,18 +24,18 @@ l    0,4,-10    0.2                0,255,0
 pl    0,-1,0        0,1,0          255,255,0
 
 ################### SPHERE ####################
-##### center ###### diameter ###### color #####
+##### origin ###### diameter ###### color #####
 sp    0,0,-2        1.0             0,255,0
 
-################# SQUARE ######################
-#    center  normal  side_size   color
-sq   0,0,-6  0,0,1   5.0         127,127,255
+################# SQUARE ##################
+#### center  normal  side_size  color #####
+sq   0,0,-6  0,0,1   5.0        127,127,255
 
 ################# TRIANGLE ########################
 ### vertex #### vertex ##### vertex ##### color ###
 tr  -2,-0.5,0   2,-0.5,0     0,-0.5,-5    0,255,255
 
 ################# CYLINDER ###############################
-#    center    orientation  diameter  height   color
+#    origin    normal       diameter  height   color
 cy   -3,0,0    0,1,0        1.5       1.2      255,127,127
 cy   3,0,0    -0.5,1,0.25   2         2.2      255,255,127
