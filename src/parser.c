@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:48:22 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/18 23:39:58 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/20 20:36:50 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static int		*resolution(char **r, int *errcode)
 	res = NULL;
 	if (set)
 		*errcode = EREPEAT;
+	else if (strarray_len(r) != 3)
+		*errcode = EBADFMT;
 	else if (!(res = malloc(sizeof(*res) * 2)))
 		*errcode = ERRSYS;
 	else
