@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 18:16:42 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 11:53:59 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/21 10:47:54 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ static int		key_press_hook(int keycode, t_server *x)
 	return (0);
 }
 
+static int		expose_hook(t_server *x)
+{
+	return (mlx_put_image_to_window(x->mlx, x->window, x->image->image, 0, 0));
+}
+
 unsigned int	mlx_listen(t_server *x)
 {
 	void *w;
@@ -40,6 +45,7 @@ unsigned int	mlx_listen(t_server *x)
 	w = x->window;
 	mlx_hook(w, KeyPress, KeyPressMask, key_press_hook, x);
 	mlx_hook(w, DestroyNotify, StructureNotifyMask, exit_hook, x);
+	mlx_expose_hook(w, expose_hook, x);
 	mlx_loop(x->mlx);
 	return (0);
 }
