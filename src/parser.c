@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:48:22 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/20 20:36:50 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/22 22:00:01 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,21 @@ static void		scene_parser(char **line, t_world *w, int *err)
 	else
 		figures_parser(line, w, err);
 }
+
+/*
+**	parser_file: Parses a scene file, searching for its elements
+**  and atributting values to the s_world struct. Check for errors
+**  while parsing
+**
+**	@fd: Scene file descriptor.
+**	@*world: Pointer to the world struct.
+**	@**note: Pointer to note string, which can
+**  be used to give aditional error information.
+**
+**	Return: 0 if no errors found, error code otherwise.
+**	Possible error codes can be found on the errcode.h
+**  header file.
+*/
 
 int				parser_file(int fd, t_world *world, char **note)
 {

@@ -6,7 +6,7 @@
 /*   By: aroque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 16:00:07 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/15 11:19:14 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/22 22:57:31 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@ static int		write_dib_header(int fd, unsigned w, unsigned h)
 	dh.clr_important = 0;
 	return (write(fd, (void *)&dh, BITMAP_HEADER_SIZE));
 }
+
+/*
+**	export_bitmap: Export the scene image as a bitmap file,
+**  with 40-bits header.
+**
+**	@x: t_server instance processed bu the render function.
+**
+**  Return: 0, if succesful, error code otherwise.
+*/
 
 int				export_bitmap(t_server x)
 {

@@ -6,7 +6,7 @@
 /*   By: aroque <aroque@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 18:44:08 by aroque            #+#    #+#             */
-/*   Updated: 2020/09/18 00:38:45 by aroque           ###   ########.fr       */
+/*   Updated: 2020/09/22 22:31:19 by aroque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,19 @@
 #include "light.h"
 #include <math.h>
 #include <stdbool.h>
+
+/*
+**	intersect: Calculate the intersection between a ray
+**  emitted by the camera and the world elements. During
+**  the execution, the ray->hit struct is assigned with
+**  intersection information.
+**
+**	@*ray: Ray emitted by a camera, with a particular orientation.
+**	@*world: World data structure with the scene elements.
+**
+**  Return: True, if the ray intersects a scene element.
+**  False otherwise.
+*/
 
 bool			intersect(t_ray *ray, t_list *world)
 {
@@ -46,6 +59,18 @@ bool			intersect(t_ray *ray, t_list *world)
 	return (hit);
 }
 
+/*
+**	raytrace: Calculate a pixel color on the screen based
+**  on a ray emitted by the camera. The raytrace function
+**  is capable of calculate lighting normals, shadows and
+**  background pixels.
+**
+**	@*ray: Ray emitted by a camera, with a particular orientation.
+**	@*world: World data structure with the scene elements.
+**
+**  Return: Color of pixel hit by the camera ray.
+*/
+
 t_color			raytrace(t_ray *ray, t_world *world)
 {
 	bool		vis;
@@ -68,6 +93,15 @@ t_color			raytrace(t_ray *ray, t_world *world)
 	}
 	return (color);
 }
+
+/*
+**	render: Renders a new scene, based on world, window and image
+**  information found on the pointer to struct s_server *x;
+**  Depending on the value of x->windowless, the scene can be
+**  seen on a window or exported to a BMP file.
+**
+**	@*x: t_server data structure.
+*/
 
 void			render(t_server *x)
 {
